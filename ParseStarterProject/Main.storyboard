@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UBE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IjG-3l-XYa">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UBE Jam" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IjG-3l-XYa">
                                 <rect key="frame" x="160" y="37" width="55" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="1Xu-lC-YFO"/>
@@ -159,7 +159,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="UBE" id="GsW-q0-uH3">
+                                    <navigationItem title="UBE Jam" id="GsW-q0-uH3">
                                         <barButtonItem key="leftBarButtonItem" title="Logout" id="nc6-uT-Nvb">
                                             <connections>
                                                 <segue destination="BYZ-38-t0r" kind="show" identifier="logoutSegue" id="Xea-Z0-ojB"/>
@@ -175,7 +175,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mu8-Up-6wd">
                                 <rect key="frame" x="16" y="455" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Call An Ube"/>
+                                <state key="normal" title="Call An Ube Jam"/>
                                 <connections>
                                     <action selector="callAnUber:" destination="eu9-66-XBW" eventType="touchUpInside" id="sKT-vZ-03i"/>
                                 </connections>
