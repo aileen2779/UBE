@@ -1,11 +1,14 @@
 import UIKit
 import Parse
+import LocalAuthentication
+import AudioToolbox
 
-class ViewController: UIViewController {
+
+class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var userSignupSwitch: UISwitch!
     
-    var signUpMode = true
+    var signUpMode = false
     
     @IBOutlet var usernameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
@@ -14,72 +17,6 @@ class ViewController: UIViewController {
     
     @IBAction func signupOrLogin(_ sender: AnyObject) {
         
-        if usernameTextField.text == ""{
-            animateMe(textField: self.usernameTextField)
-            return
-        }
-
-        if passwordTextField.text == "" {
-            animateMe(textField: self.passwordTextField)
-            return
-        }
-
-        if signUpMode {
-                
-            let user = PFUser()
-                
-            user.username = usernameTextField.text
-            user.password = passwordTextField.text
- 
-            user["isDriver"] = userSignupSwitch.isOn
-            user.signUpInBackground(block: { (success, error) in
-                    if let error = error {
-                        var displayedErrorMessage = "Please try again later"
-                        let error = error as NSError
-                        if let parseError = error.userInfo["error"] as? String {
-                            displayedErrorMessage = parseError
-                        }
-                        self.displayAlert(title: "Sign Up Failed", message: displayedErrorMessage)
-                        print("Sign Up Failed")
-                        
-                    } else {
-                        
-                        print("Sign Up Successful")
-                       
-                        if let isDriver = PFUser.current()?["isDriver"] as? Bool {
-                            if isDriver {
-                                self.performSegue(withIdentifier: "showDriverViewController", sender: self)
-                            } else {
-                                self.performSegue(withIdentifier: "showRiderViewController", sender: self)
-                            }
-                        }
-                    }
-                }
-            )
-                
-        } else {
-                
-                PFUser.logInWithUsername(inBackground: usernameTextField.text!, password: passwordTextField.text!, block: { (user, error) in
-                    if let error = error {
-                        var displayedErrorMessage = "Please try again later"
-                        let error = error as NSError
-                        if let parseError = error.userInfo["error"] as? String {
-                            displayedErrorMessage = parseError
-                        }
-                        self.displayAlert(title: "Sign Up Failed", message: displayedErrorMessage)
-                    } else {
-                        
-                        print("Log In Successful")
-                        if let isDriver = PFUser.current()?["isDriver"] as? Bool {
-                            if isDriver {
-                                self.performSegue(withIdentifier: "showDriverViewController", sender: self)
-                            } else {
-                                self.performSegue(withIdentifier: "showRiderViewController", sender: self)
-                            }
-                        }
-                    }
-                })
-        }
     }
 
     
@@ -124,10 +61,95 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         showSegmentedControl()
-        print(selector.selectedIndex)
-        loginStackView.isHidden = false
-        }
+        loginToDo()
+    }
+    @IBOutlet weak var loginButton: UIButton!
     
+    func loginToDo() {
+        loginStackView.isHidden = false
+        loginButton.setTitle("Log In", for: .normal)
+        touchIDIcon.isHidden = false
+        touchIDButton.isHidden = false
+    }
+
+    func registerToDo() {
+        loginStackView.isHidden = false
+        loginButton.setTitle("Register", for: .normal)
+        touchIDIcon.isHidden = true
+        touchIDButton.isHidden = true
+    }
+    
+
+    @IBAction func loginButtonTapped(_ sender: Any) {
+        print(selector.selectedIndex)
+        if usernameTextField.text == ""{
+            animateMe(textField: self.usernameTextField)
+            return
+        }
+        
+        if passwordTextField.text == "" {
+            animateMe(textField: self.passwordTextField)
+            return
+        }
+        
+        if signUpMode {
+            
+            let user = PFUser()
+            
+            user.username = usernameTextField.text
+            user.password = passwordTextField.text
+            
+            user["isDriver"] = (selector.selectedIndex == 0 ? true : false)
+            user.signUpInBackground(block: { (success, error) in
+                if let error = error {
+                    var displayedErrorMessage = "Please try again later"
+                    let error = error as NSError
+                    if let parseError = error.userInfo["error"] as? String {
+                        displayedErrorMessage = parseError
+                    }
+                    self.displayAlert(title: "Registration Failed", message: displayedErrorMessage)
+                    print("Registration Failed")
+                    
+                } else {
+                    
+                    print("Registration Successful")
+                    
+                    if let isDriver = PFUser.current()?["isDriver"] as? Bool {
+                        if isDriver {
+                            self.performSegue(withIdentifier: "showDriverViewController", sender: self)
+                        } else {
+                            self.performSegue(withIdentifier: "showRiderViewController", sender: self)
+                        }
+                    }
+                }
+            }
+            )
+            
+        } else {
+            
+            PFUser.logInWithUsername(inBackground: usernameTextField.text!, password: passwordTextField.text!, block: { (user, error) in
+                if let error = error {
+                    var displayedErrorMessage = "Please try again later"
+                    let error = error as NSError
+                    if let parseError = error.userInfo["error"] as? String {
+                        displayedErrorMessage = parseError
+                    }
+                    self.displayAlert(title: "Log In Failed", message: displayedErrorMessage)
+                } else {
+                    
+                    print("Log In Successful")
+                    if let isDriver = PFUser.current()?["isDriver"] as? Bool {
+                        if isDriver {
+                            self.performSegue(withIdentifier: "showDriverViewController", sender: self)
+                        } else {
+                            self.performSegue(withIdentifier: "showRiderViewController", sender: self)
+                        }
+                    }
+                }
+            })
+        }
+
+    }
     
     @IBAction func selectorDidChange(_ sender: Any) {
 //        print(selector.selectedIndex)
@@ -156,13 +178,51 @@ class ViewController: UIViewController {
         print(selector.selectedIndex)
 
     }
+    
+    // Touch ID objects
+    @IBOutlet weak var touchIDButton: UIButton!
+    @IBOutlet weak var touchIDIcon: UIImageView!
+    
+    @IBAction func touchIDButtonTapped(_ sender: Any) {
+        touchAuthenticateUser()
+    }
+    
+    func touchAuthenticateUser() {
+        
+        let touchIDManager = TouchIDManager()
+        
+        touchIDManager.authenticateUser(success: { () -> () in
+            OperationQueue.main.addOperation({ () -> Void in
+//                self.loginDone()
+            })
+        }, failure: { (evaluationError: NSError) -> () in
+            switch evaluationError.code {
+            case LAError.Code.systemCancel.rawValue:
+                print("Authentication cancelled by the system")
+            case LAError.Code.userCancel.rawValue:
+                print("Authentication cancelled by the user")
+            case LAError.Code.userFallback.rawValue:
+                print("User wants to use a password")
+            case LAError.Code.touchIDNotEnrolled.rawValue:
+                print("TouchID not enrolled")
+            case LAError.Code.passcodeNotSet.rawValue:
+                print("Passcode not set")
+            default:
+                print("Authentication failed")
+                //self.loginToDo()
+            }
+            self.loginToDo()
+        })
+    }
+
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
     func displayAlert(title: String, message: String) {
-        
+        vibrate(howMany: 1)
         let alertcontroller = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertcontroller.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alertcontroller, animated: true, completion: nil)
@@ -177,4 +237,16 @@ class ViewController: UIViewController {
         UIView.animate(withDuration: 0.1, delay: 0.2, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {_thisTextField.center.x += 10 }, completion: nil)
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        super.touchesBegan(touches, with: event)
+    }
+
+    func vibrate(howMany: Int) {
+        let x = Int(howMany)
+        for _ in 1...x {
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+            //sleep(1)
+        }
+    }
 }

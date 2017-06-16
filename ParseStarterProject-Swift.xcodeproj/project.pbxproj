@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7E5A57E91EF3A9640083F4C6 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5A57E81EF3A9640083F4C6 /* CustomTextField.swift */; };
 		7E5A57ED1EF43F3F0083F4C6 /* NPSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5A57EC1EF43F3F0083F4C6 /* NPSegmentedControl.swift */; };
+		7E5A57F61EF465BF0083F4C6 /* TouchIDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5A57F41EF465BF0083F4C6 /* TouchIDManager.m */; };
+		7E5A57F71EF465BF0083F4C6 /* TouchIDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5A57F51EF465BF0083F4C6 /* TouchIDManager.swift */; };
 		814C3ACB1B69877600E307BB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 814C3AC81B69877600E307BB /* Images.xcassets */; };
 		81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814A1A49DA1800E65899 /* AppDelegate.swift */; };
 		81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814C1A49DA1800E65899 /* ViewController.swift */; };
@@ -27,6 +29,11 @@
 /* Begin PBXFileReference section */
 		7E5A57E81EF3A9640083F4C6 /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		7E5A57EC1EF43F3F0083F4C6 /* NPSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NPSegmentedControl.swift; sourceTree = "<group>"; };
+		7E5A57F11EF465BE0083F4C6 /* ParseStarterProject-Swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ParseStarterProject-Swift-Bridging-Header.h"; sourceTree = "<group>"; };
+		7E5A57F21EF465BF0083F4C6 /* TouchIDBridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TouchIDBridging-Header.h"; sourceTree = "<group>"; };
+		7E5A57F31EF465BF0083F4C6 /* TouchIDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchIDManager.h; sourceTree = "<group>"; };
+		7E5A57F41EF465BF0083F4C6 /* TouchIDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchIDManager.m; sourceTree = "<group>"; };
+		7E5A57F51EF465BF0083F4C6 /* TouchIDManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchIDManager.swift; sourceTree = "<group>"; };
 		814C3AC81B69877600E307BB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		814C3AC91B69877600E307BB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81BA81451A49DA1800E65899 /* ParseStarterProject-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ParseStarterProject-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +79,26 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		7E5A57EF1EF465800083F4C6 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				7E5A57F01EF465940083F4C6 /* TouchID */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		7E5A57F01EF465940083F4C6 /* TouchID */ = {
+			isa = PBXGroup;
+			children = (
+				7E5A57F21EF465BF0083F4C6 /* TouchIDBridging-Header.h */,
+				7E5A57F31EF465BF0083F4C6 /* TouchIDManager.h */,
+				7E5A57F41EF465BF0083F4C6 /* TouchIDManager.m */,
+				7E5A57F51EF465BF0083F4C6 /* TouchIDManager.swift */,
+				7E5A57F11EF465BE0083F4C6 /* ParseStarterProject-Swift-Bridging-Header.h */,
+			);
+			name = TouchID;
+			sourceTree = "<group>";
+		};
 		814C3AC51B69877600E307BB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +111,7 @@
 		81BA813C1A49DA1800E65899 = {
 			isa = PBXGroup;
 			children = (
+				7E5A57EF1EF465800083F4C6 /* Classes */,
 				7E5A57E71EF3A9490083F4C6 /* View */,
 				81BA81471A49DA1800E65899 /* Main */,
 				814C3AC51B69877600E307BB /* Resources */,
@@ -170,7 +198,7 @@
 					81BA81441A49DA1800E65899 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = U47Q3369SJ;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 					};
 				};
 			};
@@ -215,6 +243,8 @@
 				C834A5E41D33B60D00AEA09E /* RiderViewController.swift in Sources */,
 				7E5A57ED1EF43F3F0083F4C6 /* NPSegmentedControl.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
+				7E5A57F71EF465BF0083F4C6 /* TouchIDManager.swift in Sources */,
+				7E5A57F61EF465BF0083F4C6 /* TouchIDManager.m in Sources */,
 				C834A5E81D33CECC00AEA09E /* RiderLocationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,6 +339,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = U47Q3369SJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -319,6 +350,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GamyMalasarte.UBEJam;
 				PRODUCT_NAME = "ParseStarterProject-Swift";
+				SWIFT_OBJC_BRIDGING_HEADER = "ParseStarterProject-Swift-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -329,6 +362,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = U47Q3369SJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -339,6 +373,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.GamyMalasarte.UBEJam;
 				PRODUCT_NAME = "ParseStarterProject-Swift";
+				SWIFT_OBJC_BRIDGING_HEADER = "ParseStarterProject-Swift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
