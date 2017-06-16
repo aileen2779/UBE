@@ -30,7 +30,7 @@ class ViewController: UIViewController {
                 
             user.username = usernameTextField.text
             user.password = passwordTextField.text
-                
+ 
             user["isDriver"] = userSignupSwitch.isOn
             user.signUpInBackground(block: { (success, error) in
                     if let error = error {
@@ -117,11 +117,45 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    @IBOutlet weak var loginStackView: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        showSegmentedControl()
+        print(selector.selectedIndex)
+        loginStackView.isHidden = false
         }
+    
+    
+    @IBAction func selectorDidChange(_ sender: Any) {
+//        print(selector.selectedIndex)
+        usernameTextField.placeholder = (selector.selectedIndex == 0) ? "Passenger ID" : "Driver ID"
+        
+    }
+    
 
+    @IBOutlet weak var selector: NPSegmentedControl!
+    
+    func showSegmentedControl() {
+        let myElements = ["Passenger", "Driver"]
+        selector.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1)
+        selector.cursor = UIImageView(image: UIImage(named: "tabindicator"))
+        
+        selector.unselectedFont = UIFont(name: "HelveticaNeue-Light", size: 20)
+        selector.selectedFont = UIFont(name: "HelveticaNeue-Bold", size: 20)
+        selector.unselectedTextColor = UIColor(white: 1, alpha: 0.8)
+        selector.unselectedColor = UIColor(red: 10/255, green: 137/255, blue: 169/255, alpha: 0.5)
+        selector.selectedTextColor = UIColor(white: 1, alpha: 1)
+        selector.selectedColor = UIColor(red: 10/255, green: 137/255, blue: 169/255, alpha: 1)
+        selector.cursorPosition = CursorPosition.Bottom
+        
+        selector.setItems(items: myElements)
+//        labelIndex.text = "Index : \(selector.selectedIndex)"
+        print(selector.selectedIndex)
+
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
