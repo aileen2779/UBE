@@ -1,10 +1,6 @@
 //
 //  RiderViewController.swift
-//  ParseStarterProject-Swift
-//
-//  Created by Rob Percival on 11/07/2016.
-//  Copyright © 2016 Parse. All rights reserved.
-//
+
 
 import UIKit
 import Parse
@@ -36,26 +32,19 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         if riderRequestActive {
             
             callAnUberButton.setTitle("Call An Uber", for: [])
-            
             riderRequestActive = false
-            
             let query = PFQuery(className: "RiderRequest")
             
             query.whereKey("username", equalTo: (PFUser.current()?.username)!)
-            
             query.findObjectsInBackground(block: { (objects, error) in
                 
                 if let riderRequests = objects {
                     
                     for riderRequest in riderRequests {
-                        
                             riderRequest.deleteInBackground()
                         
                     }
-                    
                 }
-                
-                
             })
             
         } else {
@@ -67,29 +56,18 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
             self.callAnUberButton.setTitle("Cancel Uber", for: [])
         
             let riderRequest = PFObject(className: "RiderRequest")
-        
             riderRequest["username"] = PFUser.current()?.username
-        
             riderRequest["location"] = PFGeoPoint(latitude: userLocation.latitude, longitude: userLocation.longitude)
-            
             riderRequest.saveInBackground(block: { (success, error) in
                 
                 if success {
-                    
                     print("Called an uber")
-                    
-                    
                 } else {
                     
                     self.callAnUberButton.setTitle("Call An Uber", for: [])
-                    
                     self.riderRequestActive = false
-                    
                     self.displayAlert(title: "Could not call Uber", message: "Please try again!")
-                   
                 }
-                
-                
             })
             
         } else {
@@ -101,56 +79,39 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         }
         
     }
+    
     @IBOutlet var callAnUberButton: UIButton!
-    
-    
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "logoutSegue" {
-            
             locationManager.stopUpdatingLocation()
-            
             PFUser.logOut()
-            
         }
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
         locationManager.delegate = self
-        
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
         locationManager.requestWhenInUseAuthorization()
-        
         locationManager.startUpdatingLocation()
-        
         callAnUberButton.isHidden = true
-        
+
         let query = PFQuery(className: "RiderRequest")
-        
         query.whereKey("username", equalTo: (PFUser.current()?.username)!)
-        
         query.findObjectsInBackground(block: { (objects, error) in
             
             if let objects = objects {
-                
                 if objects.count > 0 {
-                
                     self.riderRequestActive = true
-                
                     self.callAnUberButton.setTitle("Cancel Uber", for: [])
-                    
                 }
- 
             }
             
             self.callAnUberButton.isHidden = false
-            
             
         })
 
@@ -160,76 +121,51 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if let location = manager.location?.coordinate {
-            
             userLocation = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-            
             if driverOnTheWay == false {
-            
                 let region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-            
                 self.map.setRegion(region, animated: true)
-            
                 self.map.removeAnnotations(self.map.annotations)
-            
                 let annotation = MKPointAnnotation()
-            
                 annotation.coordinate = userLocation
-                
                 annotation.title = "Your Location"
-            
                 self.map.addAnnotation(annotation)
-                
             }
             
             let query = PFQuery(className: "RiderRequest")
             
             query.whereKey("username", equalTo: (PFUser.current()?.username)!)
-            
             query.findObjectsInBackground(block: { (objects, error) in
                 
                 if let riderRequests = objects {
-                    
                     for riderRequest in riderRequests {
-                        
                         riderRequest["location"] = PFGeoPoint(latitude: self.userLocation.latitude, longitude: self.userLocation.longitude)
-                        
                         riderRequest.saveInBackground()
-                        
                     }
-                    
                 }
-                
-                
             })
 
-            
             
         }
         
         if riderRequestActive == true {
             
             let query = PFQuery(className: "RiderRequest")
-            
+
             query.whereKey("username", equalTo: (PFUser.current()?.username!)!)
-            
             query.findObjectsInBackground(block: { (objects, error) in
                 
                 if let riderRequests = objects {
-                    
                     for riderRequest in riderRequests {
-                        
                         if let driverUsername = riderRequest["driverResponded"] {
-                            
+
                             let query = PFQuery(className: "DriverLocation")
-                            
                             query.whereKey("username", equalTo: driverUsername)
-                            
                             query.findObjectsInBackground(block: { (objects, error) in
                                 
                                 if let driverLocations = objects {
                                     
                                     for driverLocationObject in driverLocations {
-                                        
                                         if let driverLocation = driverLocationObject["location"] as? PFGeoPoint {
                                             
                                             self.driverOnTheWay = true
@@ -242,7 +178,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
                                             
                                             let roundedDistance = round(distance * 100) / 100
                                             
-                                            self.callAnUberButton.setTitle("Your driver is \(roundedDistance)km away!", for: [])
+                                            self.callAnUberButton.setTitle("Nearest driver is \(roundedDistance) mi away", for: [])
                                             
                                             let latDelta = abs(driverLocation.latitude - self.userLocation.latitude) * 2 + 0.005
                                             
@@ -266,12 +202,11 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
                                             
                                             driverLocationAnnotation.coordinate = CLLocationCoordinate2D(latitude: driverLocation.latitude, longitude: driverLocation.longitude)
                                             
-                                            driverLocationAnnotation.title = "Your driver"
+                                            driverLocationAnnotation.title = driverUsername as? String
                                             
                                             self.map.addAnnotation(driverLocationAnnotation)
                                             
                                         }
-                                        
                                         
                                     }
                                     

@@ -22,8 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //--------------------------------------
     // MARK: - UIApplicationDelegate
     //--------------------------------------
+    
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
         // Enable storing and querying data from Local Datastore.
         // Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.
         Parse.enableLocalDatastore()
@@ -116,7 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if succeeded {
                 print("ParseStarterProject successfully subscribed to push notifications on the broadcast channel.\n");
             } else {
-                print("ParseStarterProject failed to subscribe to push notifications on the broadcast channel with error = %@.\n", error)
+                print("ParseStarterProject failed to subscribe to push notifications on the broadcast channel with error = %@.\n", error!)
             }
         }
     }

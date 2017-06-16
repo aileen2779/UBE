@@ -178,7 +178,7 @@ class DriverViewController: UITableViewController, CLLocationManagerDelegate {
         
         let roundedDistance = round(distance * 100) / 100
 
-        cell.textLabel?.text = requestUsernames[indexPath.row] + " - \(roundedDistance)km away"
+        cell.textLabel?.text = requestUsernames[indexPath.row] + " - \(roundedDistance)mi away"
 
         return cell
     }
