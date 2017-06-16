@@ -32,7 +32,6 @@ class DriverViewController: UITableViewController, CLLocationManagerDelegate {
             
             if let destination = segue.destination as? RiderLocationViewController { // segue.destinationViewController is now segue.destination
 
-                
                 if let row = tableView.indexPathForSelectedRow?.row {
                 
                     destination.requestLocation = requestLocations[row]
@@ -40,11 +39,7 @@ class DriverViewController: UITableViewController, CLLocationManagerDelegate {
                     destination.requestUsername = requestUsernames[row]
                     
                 }
-                
-                
             }
-            
-            
         }
         
     }
@@ -104,9 +99,6 @@ class DriverViewController: UITableViewController, CLLocationManagerDelegate {
             
             
             let query = PFQuery(className: "RiderRequest")
-            
-            
-            
             
             query.whereKey("location", nearGeoPoint: PFGeoPoint(latitude: location.latitude, longitude: location.longitude))
             
