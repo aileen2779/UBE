@@ -189,6 +189,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func touchAuthenticateUser() {
         
+        // Hide the keyboard
+        view.endEditing(true)
+        
         let touchIDManager = TouchIDManager()
         
         touchIDManager.authenticateUser(success: { () -> () in
