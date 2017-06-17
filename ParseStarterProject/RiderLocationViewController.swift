@@ -19,53 +19,29 @@ class RiderLocationViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet var map: MKMapView!
     
     @IBAction func acceptRequest(_ sender: AnyObject) {
-        
         let query = PFQuery(className: "RiderRequest")
-        
         query.whereKey("username", equalTo: requestUsername)
-        
         query.findObjectsInBackground { (objects, error) in
-            
             if let riderRequests = objects {
-                
                 for riderRequest in riderRequests {
-                    
                     riderRequest["driverResponded"] = PFUser.current()?.username
-                    
                     riderRequest.saveInBackground()
-                    
                     let requestCLLocation = CLLocation(latitude: self.requestLocation.latitude, longitude: self.requestLocation.longitude)
-                    
                     CLGeocoder().reverseGeocodeLocation(requestCLLocation, completionHandler: { (placemarks, error) in
-                        
                         if let placemarks = placemarks {
-                            
                             if placemarks.count > 0 {
-                                
                                let mKPlacemark = MKPlacemark(placemark: placemarks[0])
-                                
                                 let mapItem = MKMapItem(placemark: mKPlacemark)
-                                
                                 mapItem.name = self.requestUsername
-                                
                                 let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
-                                
                                 mapItem.openInMaps(launchOptions: launchOptions)
-                                
                             }
-                            
                         }
-                        
-                        
                     })
-                    
                 }
-                
             }
-            
-            
         }
-        
+
     }
     
     
@@ -75,20 +51,12 @@ class RiderLocationViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
         let region = MKCoordinateRegion(center: requestLocation, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        
         map.setRegion(region, animated: true)
-        
         let annotation = MKPointAnnotation()
-        
         annotation.coordinate = requestLocation
-        
         annotation.title = requestUsername
-        
         map.addAnnotation(annotation)
-        
-        
     }
 
     override func didReceiveMemoryWarning() {

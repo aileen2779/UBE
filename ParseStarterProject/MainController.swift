@@ -4,7 +4,7 @@ import LocalAuthentication
 import AudioToolbox
 
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class MainController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var userSignupSwitch: UISwitch!
     

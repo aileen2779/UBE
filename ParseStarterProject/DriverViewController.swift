@@ -80,6 +80,8 @@ class DriverViewController: UITableViewController, CLLocationManagerDelegate {
                             if riderRequest["driverResponded"] == nil {
                                 self.requestUsernames.append(username)
                                 self.requestLocations.append(CLLocationCoordinate2D(latitude: (riderRequest["location"] as AnyObject).latitude, longitude: (riderRequest["location"] as AnyObject).longitude))
+                                
+                                print(CLLocationCoordinate2D(latitude: (riderRequest["location"] as AnyObject).latitude, longitude: (riderRequest["location"] as AnyObject).longitude))
                             }
                         }
                     }
