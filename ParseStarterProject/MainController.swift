@@ -68,8 +68,18 @@ class MainController: UIViewController, UITextFieldDelegate {
     func loginToDo() {
         loginStackView.isHidden = false
         loginButton.setTitle("Log In", for: .normal)
+        loginButton.isEnabled = true
         touchIDIcon.isHidden = false
-        touchIDButton.isHidden = false
+        
+        let preferences = UserDefaults.standard
+        if preferences.object(forKey: "username") != nil {
+            usernameTextField.text = preferences.object(forKey: "username") as? String
+            passwordTextField.text = preferences.object(forKey: "password") as? String
+        }
+        
+        if preferences.object(forKey: "isTouchIDEnrolled") != nil {
+            touchIDButton.isHidden = false
+        }
     }
 
     func registerToDo() {
@@ -92,6 +102,10 @@ class MainController: UIViewController, UITextFieldDelegate {
             return
         }
         
+        
+        // disable login button to prevent logging in twice
+        loginButton.isEnabled = false
+        
         if signUpMode {
             
             let user = PFUser()
@@ -108,8 +122,9 @@ class MainController: UIViewController, UITextFieldDelegate {
                         displayedErrorMessage = parseError
                     }
                     self.displayAlert(title: "Registration Failed", message: displayedErrorMessage)
-                    print("Registration Failed")
                     
+                    print("Registration Failed")
+                    self.loginButton.isEnabled = true
                 } else {
                     
                     print("Registration Successful")
@@ -126,6 +141,7 @@ class MainController: UIViewController, UITextFieldDelegate {
             )
             
         } else {
+
             
             PFUser.logInWithUsername(inBackground: usernameTextField.text!, password: passwordTextField.text!, block: { (user, error) in
                 if let error = error {
@@ -135,6 +151,9 @@ class MainController: UIViewController, UITextFieldDelegate {
                         displayedErrorMessage = parseError
                     }
                     self.displayAlert(title: "Log In Failed", message: displayedErrorMessage)
+                    
+                    print("Log In Failed")
+                    self.loginButton.isEnabled = true
                 } else {
                     
                     print("Log In Successful")
@@ -145,6 +164,13 @@ class MainController: UIViewController, UITextFieldDelegate {
                             self.performSegue(withIdentifier: "showRiderViewController", sender: self)
                         }
                     }
+                    
+                    let preferences = UserDefaults.standard
+                    preferences.setValue(self.usernameTextField.text!, forKey: "username")
+                    preferences.setValue(self.passwordTextField.text!, forKey: "password")
+                    preferences.setValue(self.selector.selectedIndex, forKey: "isDriverSelector")
+                    preferences.setValue(true, forKey: "isTouchIdEnrolled")
+
                 }
             })
         }
@@ -161,6 +187,16 @@ class MainController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var selector: NPSegmentedControl!
     
     func showSegmentedControl() {
+        
+        // find out if previously logged in
+        let preferences = UserDefaults.standard
+
+        var isDriver = 0
+        if preferences.object(forKey: "isDriverSelector") != nil {
+            //assign preferences to selector
+            isDriver = (preferences.object(forKey: "isDriverSelector") as! Int)
+        }
+        
         let myElements = ["Passenger", "Driver"]
         selector.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1)
         selector.cursor = UIImageView(image: UIImage(named: "tabindicator"))
@@ -175,7 +211,9 @@ class MainController: UIViewController, UITextFieldDelegate {
         
         selector.setItems(items: myElements)
 //        labelIndex.text = "Index : \(selector.selectedIndex)"
-        print(selector.selectedIndex)
+        print(isDriver)
+        selector.selectCell(index: isDriver, animate: true)
+
 
     }
     

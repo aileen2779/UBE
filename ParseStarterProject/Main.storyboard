@@ -36,7 +36,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hZA-bC-3vy" userLabel="Login Stack View">
                                 <rect key="frame" x="37.5" y="167" width="300" height="170"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Passenger ID" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="MVg-M3-3aZ" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Passenger ID" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="MVg-M3-3aZ" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="fBL-bp-yLr"/>
@@ -51,7 +51,7 @@
                                             <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="username"/>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="soM-ad-3Oo" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="soM-ad-3Oo" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="60" width="300" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="4zg-rV-er5"/>
