@@ -303,7 +303,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5cu-t7-cfK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-463.19999999999999" y="-839.73013493253382"/>
+            <point key="canvasLocation" x="-1122" y="-841"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2Ee-3f-4fw">
@@ -328,6 +328,6 @@
         <image name="username" width="20" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Xea-Z0-ojB"/>
+        <segue reference="ban-9p-BcI"/>
     </inferredMetricsTieBreakers>
 </document>

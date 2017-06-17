@@ -3,6 +3,7 @@
 
 import UIKit
 import Parse
+import AudioToolbox
 
 class DriverViewController: UITableViewController, CLLocationManagerDelegate {
     
@@ -12,6 +13,11 @@ class DriverViewController: UITableViewController, CLLocationManagerDelegate {
     var requestLocations = [CLLocationCoordinate2D]()
     
     var userLocation = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+    
+    let preferences = UserDefaults.standard
+    //preferences.setValue(0, forKey: "currentRow")
+    
+    var myCurrentLabel = ""
     
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -102,7 +108,13 @@ class DriverViewController: UITableViewController, CLLocationManagerDelegate {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
+    // set custom row height
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return 60.0
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return requestUsernames.count
@@ -119,7 +131,27 @@ class DriverViewController: UITableViewController, CLLocationManagerDelegate {
         let distance = driverCLLocation.distance(from: riderCLLocation) / 1000
         let roundedDistance = round(distance * 100) / 100
         cell.textLabel?.text = requestUsernames[indexPath.row] + " - \(roundedDistance) mi away"
+        print("\(cell.textLabel?.text)..\(myCurrentLabel)")
+
+        if myCurrentLabel != cell.textLabel?.text {
+            let mylabel = cell.textLabel?.text
+            preferences.setValue(mylabel, forKey: "myCurrentLabel")
+            
+            let myCurrentLabel = mylabel
+            vibrate(howMany: 1)
+            print("ding!")
+        }
+        
+        
         return cell
+    }
+    
+    func vibrate(howMany: Int) {
+        let x = Int(howMany)
+        for _ in 1...x {
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+            //sleep(1)
+        }
     }
 
 }

@@ -216,8 +216,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
                             })
                             
                         }
-                        
-                        
+
                     }
                     
                 }
