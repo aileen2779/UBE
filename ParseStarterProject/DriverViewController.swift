@@ -16,23 +16,14 @@ class DriverViewController: UITableViewController, CLLocationManagerDelegate {
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "driverLogoutSegue" {
-            
             locationManager.stopUpdatingLocation()
-            
             PFUser.logOut()
-            
             self.navigationController?.navigationBar.isHidden = true
-            
         } else if segue.identifier == "showRiderLocationViewController" {
-            
             if let destination = segue.destination as? RiderLocationViewController { // segue.destinationViewController is now segue.destination
-
                 if let row = tableView.indexPathForSelectedRow?.row {
-                
                     destination.requestLocation = requestLocations[row]
-                    
                     destination.requestUsername = requestUsernames[row]
-                    
                 }
             }
         }
@@ -58,62 +49,36 @@ class DriverViewController: UITableViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if let location = manager.location?.coordinate {
-            
             userLocation = location
-            
             let driverLocationQuery = PFQuery(className: "DriverLocation")
-            
             driverLocationQuery.whereKey("username", equalTo: (PFUser.current()?.username)!)
-            
             driverLocationQuery.findObjectsInBackground(block: { (objects, error) in
-                
-                
                 if let driverLocations = objects {
-                    
                     for driverLocation in driverLocations {
-                        
                         driverLocation["location"] = PFGeoPoint(latitude: self.userLocation.latitude, longitude: self.userLocation.longitude)
-                        
                         driverLocation.deleteInBackground()
-                        
                     }
-                    
-                    
                 }
-                
-                let driverLocation = PFObject(className: "DriverLocation")
-                
-                driverLocation["username"] = PFUser.current()?.username
-                
-                driverLocation["location"] = PFGeoPoint(latitude: self.userLocation.latitude, longitude: self.userLocation.longitude)
-                
-                driverLocation.saveInBackground()
 
-                
+                let driverLocation = PFObject(className: "DriverLocation")
+                driverLocation["username"] = PFUser.current()?.username
+                driverLocation["location"] = PFGeoPoint(latitude: self.userLocation.latitude, longitude: self.userLocation.longitude)
+                driverLocation.saveInBackground()
             })
-            
-            
+ 
             let query = PFQuery(className: "RiderRequest")
-            
+
             query.whereKey("location", nearGeoPoint: PFGeoPoint(latitude: location.latitude, longitude: location.longitude))
-            
             query.limit = 10
-            
             query.findObjectsInBackground(block: { (objects, error) in
                 
                 if let riderRequests = objects {
-                    
                     self.requestUsernames.removeAll()
                     self.requestLocations.removeAll()
-                    
                     for riderRequest in riderRequests {
-                        
                         if let username = riderRequest["username"] as? String {
-                            
                             if riderRequest["driverResponded"] == nil {
-                        
                                 self.requestUsernames.append(username)
-                            
                                 self.requestLocations.append(CLLocationCoordinate2D(latitude: (riderRequest["location"] as AnyObject).latitude, longitude: (riderRequest["location"] as AnyObject).longitude))
                             }
                         }
@@ -148,15 +113,10 @@ class DriverViewController: UITableViewController, CLLocationManagerDelegate {
         // Find distance between userLocation requestLocations[indexPath.row]
         
         let driverCLLocation = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
-        
         let riderCLLocation = CLLocation(latitude: requestLocations[indexPath.row].latitude, longitude: requestLocations[indexPath.row].longitude)
-        
         let distance = driverCLLocation.distance(from: riderCLLocation) / 1000
-        
         let roundedDistance = round(distance * 100) / 100
-
         cell.textLabel?.text = requestUsernames[indexPath.row] + " - \(roundedDistance) mi away"
-
         return cell
     }
 

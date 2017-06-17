@@ -178,7 +178,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
                                             
                                             let roundedDistance = round(distance * 100) / 100
                                             
-                                            self.callAnUberButton.setTitle("Nearest driver is \(roundedDistance) mi away", for: [])
+                                            self.callAnUberButton.setTitle("Your driver is \(roundedDistance) mi away", for: [])
                                             
                                             let latDelta = abs(driverLocation.latitude - self.userLocation.latitude) * 2 + 0.005
                                             

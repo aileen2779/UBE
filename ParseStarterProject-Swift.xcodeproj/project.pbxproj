@@ -73,6 +73,7 @@
 		7E5A57E71EF3A9490083F4C6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7ECC83651EF4A05D00891574 /* Button */,
 				7E5A57EC1EF43F3F0083F4C6 /* NPSegmentedControl.swift */,
 				7E5A57E81EF3A9640083F4C6 /* CustomTextField.swift */,
 			);
@@ -97,6 +98,13 @@
 				7E5A57F11EF465BE0083F4C6 /* ParseStarterProject-Swift-Bridging-Header.h */,
 			);
 			name = TouchID;
+			sourceTree = "<group>";
+		};
+		7ECC83651EF4A05D00891574 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Button;
 			sourceTree = "<group>";
 		};
 		814C3AC51B69877600E307BB /* Resources */ = {

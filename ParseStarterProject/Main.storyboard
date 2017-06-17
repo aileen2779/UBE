@@ -186,13 +186,20 @@
                                 </items>
                             </navigationBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4xr-en-tld">
-                                <rect key="frame" x="16" y="92" width="343" height="567"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="447"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mu8-Up-6wd">
-                                <rect key="frame" x="106" y="608" width="163" height="39"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <state key="normal" title="Call An Ube Jam"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mu8-Up-6wd">
+                                <rect key="frame" x="37" y="560" width="300" height="46"/>
+                                <color key="backgroundColor" red="0.56699335049999999" green="0.76079446979999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="S2K-ZE-IjD"/>
+                                    <constraint firstAttribute="width" constant="300" id="yRm-1U-Yuc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Request an UBER ride">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="callAnUber:" destination="eu9-66-XBW" eventType="touchUpInside" id="sKT-vZ-03i"/>
                                 </connections>
@@ -201,7 +208,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="mu8-Up-6wd" firstAttribute="centerX" secondItem="lmV-nH-qqT" secondAttribute="centerX" id="TOx-Qf-Xhj"/>
-                            <constraint firstItem="H10-Eu-ta7" firstAttribute="top" secondItem="mu8-Up-6wd" secondAttribute="bottom" constant="20" id="is4-Iq-Za9"/>
+                            <constraint firstItem="H10-Eu-ta7" firstAttribute="top" secondItem="mu8-Up-6wd" secondAttribute="bottom" constant="57" id="WAp-zW-2uI"/>
                         </constraints>
                     </view>
                     <connections>
@@ -217,16 +224,16 @@
         <scene sceneID="6g5-b0-nA1">
             <objects>
                 <tableViewController id="cpG-Uw-rF1" customClass="DriverViewController" customModule="ParseStarterProject_Swift" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="jeg-qy-5BT">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="34" sectionHeaderHeight="28" sectionFooterHeight="28" id="jeg-qy-5BT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="a2s-Zj-LGa">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="34" id="a2s-Zj-LGa">
+                                <rect key="frame" x="0.0" y="28" width="375" height="34"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a2s-Zj-LGa" id="uU1-XP-Z69">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="33.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
@@ -249,7 +256,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O33-yc-L7q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1258" y="-838"/>
+            <point key="canvasLocation" x="-1258.4000000000001" y="-838.83058470764627"/>
         </scene>
         <!--Rider Location View Controller-->
         <scene sceneID="ray-dJ-2hX">
@@ -264,19 +271,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="d9i-6b-oeV">
-                                <rect key="frame" x="16" y="83" width="343" height="294"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="441"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SBm-dO-UQX">
-                                <rect key="frame" x="133" y="394" width="109" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Accept Request"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SBm-dO-UQX">
+                                <rect key="frame" x="37.5" y="560" width="300" height="50"/>
+                                <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="JlX-8K-JRi"/>
+                                    <constraint firstAttribute="height" constant="50" id="emv-PQ-4ap"/>
+                                </constraints>
+                                <state key="normal" title="Accept Request">
+                                    <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="acceptRequest:" destination="Wxv-FW-Fje" eventType="touchUpInside" id="cYS-kq-Vc5"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1w6-xj-Nr4" firstAttribute="top" secondItem="SBm-dO-UQX" secondAttribute="bottom" constant="57" id="XwB-ww-AAG"/>
+                            <constraint firstItem="SBm-dO-UQX" firstAttribute="centerX" secondItem="ghx-5D-1r1" secondAttribute="centerX" id="h1a-7y-KNI"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="acceptRequestButton" destination="SBm-dO-UQX" id="M7H-un-Vb9"/>
@@ -285,7 +303,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5cu-t7-cfK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-463" y="-839"/>
+            <point key="canvasLocation" x="-463.19999999999999" y="-839.73013493253382"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2Ee-3f-4fw">
@@ -310,6 +328,6 @@
         <image name="username" width="20" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Xea-Z0-ojB"/>
+        <segue reference="ban-9p-BcI"/>
     </inferredMetricsTieBreakers>
 </document>
