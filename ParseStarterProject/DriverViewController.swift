@@ -131,16 +131,16 @@ class DriverViewController: UITableViewController, CLLocationManagerDelegate {
         let distance = driverCLLocation.distance(from: riderCLLocation) / 1000
         let roundedDistance = round(distance * 100) / 100
         cell.textLabel?.text = requestUsernames[indexPath.row] + " - \(roundedDistance) mi away"
-        print("\(cell.textLabel?.text)..\(myCurrentLabel)")
+//        print("\(cell.textLabel?.text)..\(myCurrentLabel)")
 
-        if myCurrentLabel != cell.textLabel?.text {
-            let mylabel = cell.textLabel?.text
-            preferences.setValue(mylabel, forKey: "myCurrentLabel")
+//        if myCurrentLabel != cell.textLabel?.text {
+//            let mylabel = cell.textLabel?.text
+//            preferences.setValue(mylabel, forKey: "myCurrentLabel")
             
-            let myCurrentLabel = mylabel
-            vibrate(howMany: 1)
-            print("ding!")
-        }
+//            let myCurrentLabel = mylabel
+//            vibrate(howMany: 1)
+//            print("ding!")
+//        }
         
         
         return cell

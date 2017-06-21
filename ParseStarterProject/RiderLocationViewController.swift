@@ -16,7 +16,7 @@ class RiderLocationViewController: UIViewController, MKMapViewDelegate {
     
     var requestUsername = ""
     
-    @IBOutlet var map: MKMapView!
+    @IBOutlet var mapView: MKMapView!
     
     @IBAction func acceptRequest(_ sender: AnyObject) {
         let query = PFQuery(className: "RiderRequest")
@@ -52,11 +52,11 @@ class RiderLocationViewController: UIViewController, MKMapViewDelegate {
 
         // Do any additional setup after loading the view.
         let region = MKCoordinateRegion(center: requestLocation, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        map.setRegion(region, animated: true)
+        mapView.setRegion(region, animated: true)
         let annotation = MKPointAnnotation()
         annotation.coordinate = requestLocation
         annotation.title = requestUsername
-        map.addAnnotation(annotation)
+        mapView.addAnnotation(annotation)
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,14 +65,5 @@ class RiderLocationViewController: UIViewController, MKMapViewDelegate {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
