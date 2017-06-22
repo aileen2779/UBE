@@ -197,11 +197,11 @@
                                     <constraint firstAttribute="height" constant="24" id="cfk-cY-FcC"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gOe-IP-8Fn" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
-                                <rect key="frame" x="22.5" y="66" width="330" height="60"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Where to?" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="HYP-xo-Dd0" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
+                                <rect key="frame" x="22" y="134" width="330" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="u88-jo-oJg"/>
-                                    <constraint firstAttribute="width" constant="330" id="yoj-IR-zp1"/>
+                                    <constraint firstAttribute="height" constant="60" id="PkD-qp-4Fs"/>
+                                    <constraint firstAttribute="width" constant="330" id="yON-AN-y7x"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -212,12 +212,32 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="TextFieldChanged:" destination="eu9-66-XBW" eventType="editingChanged" id="oMz-04-TeD"/>
+                                    <action selector="toTextFieldChanged:" destination="eu9-66-XBW" eventType="editingChanged" id="c2c-t6-09F"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pick up from" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gOe-IP-8Fn" userLabel="Pick up" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
+                                <rect key="frame" x="22.5" y="66" width="330" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="u88-jo-oJg"/>
+                                    <constraint firstAttribute="width" constant="330" id="yoj-IR-zp1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="home"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
                                     <action selector="TextFieldChanged:" destination="eu9-66-XBW" eventType="editingChanged" id="avi-6r-tev"/>
+                                    <action selector="fromTextFieldChanged:" destination="eu9-66-XBW" eventType="editingChanged" id="KdY-B5-vPl"/>
                                 </connections>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Zgh-4V-qOR">
                                 <rect key="frame" x="22.5" y="131" width="330" height="0.0"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.4941176471" green="0.72941176470000002" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="cgN-Xm-6d0"/>
                                 </constraints>
@@ -227,14 +247,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Zgh-4V-qOR" firstAttribute="trailing" secondItem="gOe-IP-8Fn" secondAttribute="trailing" id="0zi-89-TeI"/>
+                            <constraint firstItem="HYP-xo-Dd0" firstAttribute="top" secondItem="Zgh-4V-qOR" secondAttribute="top" constant="3" id="4I3-MB-30b"/>
                             <constraint firstItem="v31-F8-qwd" firstAttribute="leading" secondItem="lmV-nH-qqT" secondAttribute="leadingMargin" constant="12" id="6Ib-pA-flC"/>
                             <constraint firstItem="H10-Eu-ta7" firstAttribute="top" secondItem="4xr-en-tld" secondAttribute="bottom" id="FOB-SE-sdw"/>
                             <constraint firstAttribute="trailing" secondItem="4xr-en-tld" secondAttribute="trailing" id="Ffb-T6-Eix"/>
                             <constraint firstItem="mu8-Up-6wd" firstAttribute="centerX" secondItem="lmV-nH-qqT" secondAttribute="centerX" id="TOx-Qf-Xhj"/>
                             <constraint firstItem="H10-Eu-ta7" firstAttribute="top" secondItem="mu8-Up-6wd" secondAttribute="bottom" constant="61" id="WAp-zW-2uI"/>
                             <constraint firstItem="4xr-en-tld" firstAttribute="leading" secondItem="lmV-nH-qqT" secondAttribute="leading" id="ejk-XT-tSW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HYP-xo-Dd0" secondAttribute="trailing" constant="6" id="gAT-CA-WDQ"/>
                             <constraint firstItem="Zgh-4V-qOR" firstAttribute="top" secondItem="gOe-IP-8Fn" secondAttribute="bottom" constant="5" id="gUm-BQ-tw9"/>
                             <constraint firstItem="v31-F8-qwd" firstAttribute="top" secondItem="elL-Su-ARJ" secondAttribute="bottom" constant="12" id="gm7-Es-afv"/>
+                            <constraint firstItem="HYP-xo-Dd0" firstAttribute="leading" secondItem="lmV-nH-qqT" secondAttribute="leadingMargin" constant="6" id="kfi-PU-9yK"/>
                             <constraint firstItem="4xr-en-tld" firstAttribute="top" secondItem="lmV-nH-qqT" secondAttribute="top" id="lwJ-7c-n7Z"/>
                             <constraint firstItem="gOe-IP-8Fn" firstAttribute="top" secondItem="v31-F8-qwd" secondAttribute="bottom" constant="10" id="plT-0O-aOZ"/>
                             <constraint firstItem="gOe-IP-8Fn" firstAttribute="centerX" secondItem="lmV-nH-qqT" secondAttribute="centerX" id="qUz-zT-y4H"/>
@@ -243,10 +266,11 @@
                     </view>
                     <connections>
                         <outlet property="callAnUberButton" destination="mu8-Up-6wd" id="eck-X0-ovc"/>
+                        <outlet property="fromTextField" destination="gOe-IP-8Fn" id="4U2-v7-ftR"/>
                         <outlet property="heightConstraint" destination="cgN-Xm-6d0" id="4Ob-Un-mNV"/>
                         <outlet property="mapView" destination="4xr-en-tld" id="Oxp-4L-hur"/>
                         <outlet property="tableView" destination="Zgh-4V-qOR" id="MCv-YW-GCk"/>
-                        <outlet property="textField" destination="gOe-IP-8Fn" id="0qc-E0-qDM"/>
+                        <outlet property="toTextField" destination="HYP-xo-Dd0" id="iRY-7O-evv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MOi-Q4-h7o" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -356,6 +380,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="home" width="256" height="256"/>
         <image name="menu" width="22" height="22"/>
         <image name="password" width="20" height="22"/>
         <image name="sports-car" width="256" height="256"/>

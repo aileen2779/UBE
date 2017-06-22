@@ -147,12 +147,12 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         
         tableView.delegate = self
         tableView.dataSource = self
-        textField.delegate = self
+        fromTextField.delegate = self
         
         tableView.isHidden = true
         
         // Manage tableView visibility via TouchDown in textField
-        textField.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.touchDown)
+        fromTextField.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.touchDown)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -245,12 +245,10 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-    
-    
+
     // The sample values
-    var values = ["123 Main Street, Las Vegas NV 89111", "789 King Street, Las Vegas NV 89111", "456 Queen Street, Las Vegas NV 89111", "99 Apple Street, Las Vegas NV 89111"]
+    var fromValues = ["Home Address:\n668 Holland Heights Ave.,\nLas Vegas NV 89123", "Current Location"]
+    var toValues = ["668 Holland Heights Ave., Las Vegas NV 89123", "909 Adobe Flat Dr., Henderson NV 89011"]
     let cellReuseIdentifier = "cell"
     
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
@@ -259,19 +257,16 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     // This is optional, and a given app may want a standard UITextField
     
     
-    @IBOutlet weak var textField: NoCopyPasteUITextField!
+    //@IBOutlet weak var fromTextField: NoCopyPasteUITextField!
+    @IBOutlet weak var fromTextField: CustomTextField!
+    @IBOutlet weak var toTextField: CustomTextField!
+    
     @IBOutlet weak var tableView: UITableView!
     
-    // If user changes text, hide the tableView
-    //@IBAction func textFieldChanged(_ sender: Any) {
-    //    tableView.isHidden = true
-   // }
-    
-    
-    @IBAction func TextFieldChanged(_ sender: Any) {
-        tableView.isHidden = true
-        
-    }
+    @IBAction func fromTextFieldChanged(_ sender: Any) {
+        tableView.isHidden = true    }
+    @IBAction func toTextFieldChanged(_ sender: Any) {
+        tableView.isHidden = true    }
     
     override func viewDidLayoutSubviews()
     {
@@ -292,7 +287,8 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         }
         if touch.view != tableView
         {
-            textField.endEditing(true)
+            fromTextField.endEditing(true)
+            toTextField.endEditing(true)
             tableView.isHidden = true
         }
     }
@@ -309,17 +305,19 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        fromTextField.resignFirstResponder()
+        toTextField.resignFirstResponder()
         return true
     }
     
     // MARK: UITableViewDataSource
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return values.count;
+        return fromValues.count;
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -328,23 +326,27 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell") as UITableViewCell!
         // Set text from the data model
-        cell.textLabel?.text = values[indexPath.row]
+        cell.textLabel?.text = fromValues[indexPath.row]
         //cell.textLabel?.font = textField.font
         cell.textLabel?.font =  UIFont(name:"Avenir", size:16)
         cell.textLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
+        cell.textLabel?.numberOfLines = 3
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return 80
     }
     // MARK: UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Row selected, so set textField to relevant value, hide tableView
         // endEditing can trigger some other action according to requirements
-        textField.text = values[indexPath.row]
+        fromTextField.text = fromValues[indexPath.row]
+        toTextField.text = toValues[indexPath.row]
+        
         tableView.isHidden = true
-        textField.endEditing(true)
+        fromTextField.endEditing(true)
+        toTextField.endEditing(true)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
