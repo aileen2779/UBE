@@ -84,15 +84,23 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
             showDatePicker()
         }
     }
-    
+*/
     var datePickerVisible = false
+
+    func hideDatePicker() {
+        if datePickerVisible {
+            let datePickerView:UIDatePicker = UIDatePicker()
+            datePickerView.isHidden = true
+        }
+        datePickerVisible = false
+    }
 
     func showDatePicker() {
         datePickerVisible = true
         let datePickerView:UIDatePicker = UIDatePicker()
         
         datePickerView.datePickerMode = UIDatePickerMode.dateAndTime
-        datePickerView.frame = CGRect(x: 0, y: 137, width: view.frame.width, height: 200)
+        datePickerView.frame = CGRect(x: 0, y: 237, width: view.frame.width, height: 200)
         datePickerView.backgroundColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:1.0)
         // Add an event to call onDidChangeDate function when value is changed.
         datePickerView.addTarget(self, action: #selector(RiderViewController.datePickerValueChanged(_:)), for: .valueChanged)
@@ -115,7 +123,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         
         print("Selected value \(selectedDate)")
     }
-*/
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -147,13 +155,17 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         
         tableView.delegate = self
         tableView.dataSource = self
+        
         fromTextField.delegate = self
         toTextField.delegate = self
+        whenTextField.delegate = self
+
         tableView.isHidden = true
         
         // Manage tableView visibility via TouchDown in textField
         fromTextField.addTarget(self, action: #selector(fromTextFieldActive), for: UIControlEvents.touchDown)
         toTextField.addTarget(self, action: #selector(toTextFieldActive), for: UIControlEvents.touchDown)
+        whenTextField.addTarget(self, action: #selector(whenTextFieldActive), for: UIControlEvents.touchDown)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -261,15 +273,29 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     //@IBOutlet weak var fromTextField: NoCopyPasteUITextField!
     @IBOutlet weak var fromTextField: CustomTextField!
     @IBOutlet weak var toTextField: CustomTextField!
+    @IBOutlet weak var whenTextField: CustomTextField!
+    
+    @IBOutlet weak var datePickerView: UIDatePicker!
+    
     
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func fromTextFieldChanged(_ sender: Any) {
         tableView.isHidden = true
+        datePickerView.isHidden = true
+        
     }
     @IBAction func toTextFieldChanged(_ sender: Any) {
         tableView.isHidden = true
+        datePickerView.isHidden = true
     }
+    
+    @IBAction func whenTextFieldChanged(_ sender: Any) {
+        tableView.isHidden = true
+        datePickerView.isHidden = false
+        
+    }
+    
     
     override func viewDidLayoutSubviews()
     {
@@ -297,6 +323,9 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     
     // Toggle the tableView visibility when click on textField
     func fromTextFieldActive() {
+        datePickerView.isHidden = true
+        
+        
         values = ["Home:\n668 Holland Heights Ave.,\nLas Vegas NV 89123",
                   "Current Location"]
         tableView.reloadData()
@@ -306,7 +335,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
 }
 
     func toTextFieldActive() {
-
+        datePickerView.isHidden = true
         values = ["546 Martin Luther King Blvd.,\nLas Vegas NV 89000",
                   "909 Adobe Flat Dr.,\nHenderson NV 89011",
                 "238 Highgate St.\nHenderson, NV 89012"]
@@ -316,7 +345,11 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         editField = "toTextField"
 
     }
-    
+
+    func whenTextFieldActive() {
+        datePickerView.isHidden = false
+    }
+
     // MARK: UITextFieldDelegate
     func textFieldDidEndEditing(_ textField: UITextField) {
         // TODO: Your app can do something when textField finishes editing
@@ -326,6 +359,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         fromTextField.resignFirstResponder()
         toTextField.resignFirstResponder()
+        whenTextField.resignFirstResponder()
         return true
     }
     
