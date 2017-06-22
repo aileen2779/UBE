@@ -6,7 +6,7 @@ import UIKit
 import Parse
 import MapKit
 
-class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate  {
     
     func displayAlert(title: String, message: String) {
 
@@ -142,7 +142,17 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
             self.callAnUberButton.isHidden = false
         })
 
+        // Textfield
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        textField.delegate = self
+        
+        tableView.isHidden = true
+        
+        // Manage tableView visibility via TouchDown in textField
+        textField.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.touchDown)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -249,18 +259,108 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     }
     
 
-
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-        super.touchesBegan(touches, with: event)
-        
-     //   let datePickerView:UIDatePicker = UIDatePicker()
-     //   datePickerView.isHidden = true
+    
+    
+    
+    
+    // The sample values
+    var values = ["123 Main Street, Las Vegas NV 89111", "789 King Street, Las Vegas NV 89111", "456 Queen Street, Las Vegas NV 89111", "99 Apple Street, Las Vegas NV 89111"]
+    let cellReuseIdentifier = "cell"
+    
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    
+    // Using simple subclass to prevent the copy/paste menu
+    // This is optional, and a given app may want a standard UITextField
+    
+    
+    @IBOutlet weak var textField: NoCopyPasteUITextField!
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    // If user changes text, hide the tableView
+    @IBAction func textFieldChanged(_ sender: AnyObject) {
+        tableView.isHidden = true
     }
+    
+    
+    override func viewDidLayoutSubviews()
+    {
+        // Assumption is we're supporting a small maximum number of entries
+        // so will set height constraint to content size
+        // Alternatively can set to another size, such as using row heights and setting frame
+        heightConstraint.constant = tableView.contentSize.height
+    }
+    
+
+    
+    // Manage keyboard and tableView visibility
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
+        guard let touch:UITouch = touches.first else
+        {
+            return;
+        }
+        if touch.view != tableView
+        {
+            textField.endEditing(true)
+            tableView.isHidden = true
+        }
+    }
+    
+    // Toggle the tableView visibility when click on textField
+    func textFieldActive() {
+        tableView.isHidden = !tableView.isHidden
+    }
+    
+    // MARK: UITextFieldDelegate
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        // TODO: Your app can do something when textField finishes editing
+        print("The textField ended editing. Do something based on app requirements.")
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    // MARK: UITableViewDataSource
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return values.count;
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell") as UITableViewCell!
+        // Set text from the data model
+        cell.textLabel?.text = values[indexPath.row]
+        //cell.textLabel?.font = textField.font
+        cell.textLabel?.font =  UIFont(name:"Avenir", size:16)
+        return cell
+    }
+    
+    // MARK: UITableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Row selected, so set textField to relevant value, hide tableView
+        // endEditing can trigger some other action according to requirements
+        textField.text = values[indexPath.row]
+        tableView.isHidden = true
+        textField.endEditing(true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.0
+    }
+
 }
