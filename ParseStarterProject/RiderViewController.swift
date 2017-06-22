@@ -239,7 +239,6 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     }
     
 
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -247,9 +246,10 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     
 
     // The sample values
-    var fromValues = ["Home Address:\n668 Holland Heights Ave.,\nLas Vegas NV 89123", "Current Location"]
+    var fromValues = ["Home:\n668 Holland Heights Ave.,\nLas Vegas NV 89123", "Current Location"]
     var toValues = ["668 Holland Heights Ave., Las Vegas NV 89123", "909 Adobe Flat Dr., Henderson NV 89011"]
     let cellReuseIdentifier = "cell"
+    var editField = ""
     
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
@@ -264,9 +264,11 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func fromTextFieldChanged(_ sender: Any) {
-        tableView.isHidden = true    }
+        tableView.isHidden = true
+    }
     @IBAction func toTextFieldChanged(_ sender: Any) {
-        tableView.isHidden = true    }
+        tableView.isHidden = true
+    }
     
     override func viewDidLayoutSubviews()
     {
@@ -275,7 +277,6 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         // Alternatively can set to another size, such as using row heights and setting frame
         heightConstraint.constant = tableView.contentSize.height
     }
-    
 
     
     // Manage keyboard and tableView visibility
@@ -295,6 +296,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     
     // Toggle the tableView visibility when click on textField
     func textFieldActive() {
+        print("Test")
         tableView.isHidden = !tableView.isHidden
     }
     

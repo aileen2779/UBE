@@ -212,7 +212,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="TextFieldChanged:" destination="eu9-66-XBW" eventType="editingChanged" id="oMz-04-TeD"/>
                                     <action selector="toTextFieldChanged:" destination="eu9-66-XBW" eventType="editingChanged" id="c2c-t6-09F"/>
                                 </connections>
                             </textField>
@@ -231,7 +230,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="TextFieldChanged:" destination="eu9-66-XBW" eventType="editingChanged" id="avi-6r-tev"/>
                                     <action selector="fromTextFieldChanged:" destination="eu9-66-XBW" eventType="editingChanged" id="KdY-B5-vPl"/>
                                 </connections>
                             </textField>
