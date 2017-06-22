@@ -77,52 +77,6 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     
     @IBOutlet var callAnUberButton: UIButton!
     
-/*
-    @IBAction func whereToTextField(_ sender: CustomTextField) {
-
-        if (!datePickerVisible) {
-            showDatePicker()
-        }
-    }
-*/
-    var datePickerVisible = false
-
-    func hideDatePicker() {
-        if datePickerVisible {
-            let datePickerView:UIDatePicker = UIDatePicker()
-            datePickerView.isHidden = true
-        }
-        datePickerVisible = false
-    }
-
-    func showDatePicker() {
-        datePickerVisible = true
-        let datePickerView:UIDatePicker = UIDatePicker()
-        
-        datePickerView.datePickerMode = UIDatePickerMode.dateAndTime
-        datePickerView.frame = CGRect(x: 0, y: 237, width: view.frame.width, height: 200)
-        datePickerView.backgroundColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:1.0)
-        // Add an event to call onDidChangeDate function when value is changed.
-        datePickerView.addTarget(self, action: #selector(RiderViewController.datePickerValueChanged(_:)), for: .valueChanged)
-        
-        // Add DataPicker to the view
-        view.addSubview(datePickerView)
-        
-    }
-
-    func datePickerValueChanged(_ sender: UIDatePicker){
-        
-        // Create date formatter
-        let dateFormatter: DateFormatter = DateFormatter()
-        
-        // Set date format
-        dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
-        
-        // Apply date format
-        let selectedDate: String = dateFormatter.string(from: sender.date)
-        
-        print("Selected value \(selectedDate)")
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -166,6 +120,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         fromTextField.addTarget(self, action: #selector(fromTextFieldActive), for: UIControlEvents.touchDown)
         toTextField.addTarget(self, action: #selector(toTextFieldActive), for: UIControlEvents.touchDown)
         whenTextField.addTarget(self, action: #selector(whenTextFieldActive), for: UIControlEvents.touchDown)
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -275,25 +230,21 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     @IBOutlet weak var toTextField: CustomTextField!
     @IBOutlet weak var whenTextField: CustomTextField!
     
-    @IBOutlet weak var datePickerView: UIDatePicker!
     
     
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func fromTextFieldChanged(_ sender: Any) {
         tableView.isHidden = true
-        datePickerView.isHidden = true
-        
+
     }
     @IBAction func toTextFieldChanged(_ sender: Any) {
         tableView.isHidden = true
-        datePickerView.isHidden = true
+
     }
     
     @IBAction func whenTextFieldChanged(_ sender: Any) {
         tableView.isHidden = true
-        datePickerView.isHidden = false
-        
     }
     
     
@@ -317,15 +268,16 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         {
             fromTextField.endEditing(true)
             toTextField.endEditing(true)
+            whenTextField.endEditing(true)
             tableView.isHidden = true
         }
+
+        whenTextField.isEnabled = true
+
     }
     
     // Toggle the tableView visibility when click on textField
     func fromTextFieldActive() {
-        datePickerView.isHidden = true
-        
-        
         values = ["Home:\n668 Holland Heights Ave.,\nLas Vegas NV 89123",
                   "Current Location"]
         tableView.reloadData()
@@ -335,7 +287,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
 }
 
     func toTextFieldActive() {
-        datePickerView.isHidden = true
+ 
         values = ["546 Martin Luther King Blvd.,\nLas Vegas NV 89000",
                   "909 Adobe Flat Dr.,\nHenderson NV 89011",
                 "238 Highgate St.\nHenderson, NV 89012"]
@@ -347,7 +299,9 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     }
 
     func whenTextFieldActive() {
-        datePickerView.isHidden = false
+        showDatePicker()
+        whenTextField.isEnabled = false
+
     }
 
     // MARK: UITextFieldDelegate
@@ -361,6 +315,29 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         toTextField.resignFirstResponder()
         whenTextField.resignFirstResponder()
         return true
+    }
+    
+    
+    
+    func showDatePicker() {
+        let min = Date()
+        let max = Date().addingTimeInterval(60 * 60 * 24 * 30)
+        let picker = DateTimePicker.show(minimumDate: min, maximumDate: max)
+        picker.highlightColor = UIColor(red: 255.0/255.0, green: 138.0/255.0, blue: 138.0/255.0, alpha: 1)
+        picker.darkColor = UIColor.darkGray
+        picker.doneButtonTitle = " Pick This date"
+        picker.todayButtonTitle = "Today"
+        picker.is12HourFormat = true
+        picker.dateFormat = "MM/dd/YYYY hh:mm aa"
+        //        picker.isDatePickerOnly = true
+        picker.completionHandler = { date in
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MM/dd/YYYY hh:mm aa"
+            
+            self.whenTextField.text = formatter.string(from: date)
+            self.whenTextField.isEnabled = true
+            return
+        }
     }
     
     // MARK: UITableViewDataSource
