@@ -22,21 +22,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H3K-Qj-rNY" userLabel="Selector" customClass="NPSegmentedControl" customModule="ParseStarterProject_Swift" customModuleProvider="target">
-                                <rect key="frame" x="17" y="79" width="341" height="50"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H3K-Qj-rNY" userLabel="Selector" customClass="NPSegmentedControl" customModule="ParseStarterProject_Swift" customModuleProvider="target">
+                                <rect key="frame" x="17" y="164" width="341" height="50"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="341" id="3Q9-5i-eiw"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="dZD-tC-d8x"/>
+                                    <constraint firstAttribute="height" constant="50" id="dZD-tC-d8x"/>
                                 </constraints>
                                 <connections>
                                     <action selector="selectorDidChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="YI6-Lg-wU8"/>
                                 </connections>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hZA-bC-3vy" userLabel="Login Stack View">
-                                <rect key="frame" x="37.5" y="167" width="300" height="170"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hZA-bC-3vy" userLabel="Login Stack View">
+                                <rect key="frame" x="37.5" y="252" width="300" height="170"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Passenger ID" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="MVg-M3-3aZ" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Passenger ID" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="MVg-M3-3aZ" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="fBL-bp-yLr"/>
@@ -51,7 +51,7 @@
                                             <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="username"/>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="soM-ad-3Oo" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="soM-ad-3Oo" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="60" width="300" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="4zg-rV-er5"/>
@@ -65,7 +65,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bel-wM-cHI">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bel-wM-cHI">
                                         <rect key="frame" x="0.0" y="120" width="300" height="50"/>
                                         <color key="backgroundColor" red="0.4941176471" green="0.72941176470000002" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -81,19 +81,18 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="CQX-OL-t3B"/>
                                     <constraint firstAttribute="width" constant="300" id="qqh-vf-5yO"/>
                                 </constraints>
                             </stackView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="touch-id-icon" translatesAutoresizingMaskIntoConstraints="NO" id="7yq-5q-S7w">
-                                <rect key="frame" x="155" y="345" width="65" height="63"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="touch-id-icon" translatesAutoresizingMaskIntoConstraints="NO" id="7yq-5q-S7w">
+                                <rect key="frame" x="155" y="442" width="65" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="49D-E4-BjF"/>
                                     <constraint firstAttribute="height" constant="70" id="N3z-NP-cYL"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ph0-OC-JHj" userLabel="TouchID Button">
-                                <rect key="frame" x="152.5" y="345" width="70" height="63"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ph0-OC-JHj" userLabel="TouchID Button">
+                                <rect key="frame" x="152.5" y="422" width="70" height="63"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="63" id="B1n-oW-RCt"/>
                                     <constraint firstAttribute="width" constant="70" id="h3r-Yq-vSv"/>
@@ -105,7 +104,6 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YGq-Kf-IqC" userLabel="Forgot Password Button">
                                 <rect key="frame" x="16" y="617" width="77" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="90" id="H0z-J7-eaz"/>
                                     <constraint firstAttribute="height" constant="30" id="eGy-xO-DjV"/>
                                 </constraints>
                                 <state key="normal" title="Register"/>
@@ -219,7 +217,7 @@
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Where to?" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="HYP-xo-Dd0" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
-                                <rect key="frame" x="22" y="131" width="330" height="60"/>
+                                <rect key="frame" x="23" y="131" width="330" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="PkD-qp-4Fs"/>
                                     <constraint firstAttribute="width" constant="330" id="yON-AN-y7x"/>
@@ -279,7 +277,6 @@
                             <constraint firstAttribute="trailingMargin" secondItem="HYP-xo-Dd0" secondAttribute="trailing" constant="6" id="gAT-CA-WDQ"/>
                             <constraint firstItem="v31-F8-qwd" firstAttribute="top" secondItem="elL-Su-ARJ" secondAttribute="bottom" constant="12" id="gm7-Es-afv"/>
                             <constraint firstItem="Zgh-4V-qOR" firstAttribute="centerX" secondItem="lmV-nH-qqT" secondAttribute="centerX" id="kVU-dR-Qhp"/>
-                            <constraint firstItem="HYP-xo-Dd0" firstAttribute="leading" secondItem="lmV-nH-qqT" secondAttribute="leadingMargin" constant="6" id="kfi-PU-9yK"/>
                             <constraint firstItem="4xr-en-tld" firstAttribute="top" secondItem="lmV-nH-qqT" secondAttribute="top" id="lwJ-7c-n7Z"/>
                             <constraint firstItem="gOe-IP-8Fn" firstAttribute="top" secondItem="v31-F8-qwd" secondAttribute="bottom" constant="10" id="plT-0O-aOZ"/>
                             <constraint firstItem="gOe-IP-8Fn" firstAttribute="centerX" secondItem="lmV-nH-qqT" secondAttribute="centerX" id="qUz-zT-y4H"/>
