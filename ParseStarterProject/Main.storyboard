@@ -234,9 +234,10 @@
                                 </connections>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Zgh-4V-qOR">
-                                <rect key="frame" x="22.5" y="131" width="330" height="0.0"/>
+                                <rect key="frame" x="23" y="131" width="330" height="0.0"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="330" id="9EG-Bd-WKF"/>
                                     <constraint firstAttribute="height" id="cgN-Xm-6d0"/>
                                 </constraints>
                                 <sections/>
@@ -244,22 +245,21 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Zgh-4V-qOR" firstAttribute="trailing" secondItem="gOe-IP-8Fn" secondAttribute="trailing" id="0zi-89-TeI"/>
                             <constraint firstItem="HYP-xo-Dd0" firstAttribute="top" secondItem="Zgh-4V-qOR" secondAttribute="top" constant="3" id="4I3-MB-30b"/>
                             <constraint firstItem="v31-F8-qwd" firstAttribute="leading" secondItem="lmV-nH-qqT" secondAttribute="leadingMargin" constant="12" id="6Ib-pA-flC"/>
                             <constraint firstItem="H10-Eu-ta7" firstAttribute="top" secondItem="4xr-en-tld" secondAttribute="bottom" id="FOB-SE-sdw"/>
                             <constraint firstAttribute="trailing" secondItem="4xr-en-tld" secondAttribute="trailing" id="Ffb-T6-Eix"/>
+                            <constraint firstItem="Zgh-4V-qOR" firstAttribute="top" secondItem="gOe-IP-8Fn" secondAttribute="bottom" constant="5" id="FmK-p6-ay6"/>
                             <constraint firstItem="mu8-Up-6wd" firstAttribute="centerX" secondItem="lmV-nH-qqT" secondAttribute="centerX" id="TOx-Qf-Xhj"/>
                             <constraint firstItem="H10-Eu-ta7" firstAttribute="top" secondItem="mu8-Up-6wd" secondAttribute="bottom" constant="61" id="WAp-zW-2uI"/>
                             <constraint firstItem="4xr-en-tld" firstAttribute="leading" secondItem="lmV-nH-qqT" secondAttribute="leading" id="ejk-XT-tSW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="HYP-xo-Dd0" secondAttribute="trailing" constant="6" id="gAT-CA-WDQ"/>
-                            <constraint firstItem="Zgh-4V-qOR" firstAttribute="top" secondItem="gOe-IP-8Fn" secondAttribute="bottom" constant="5" id="gUm-BQ-tw9"/>
                             <constraint firstItem="v31-F8-qwd" firstAttribute="top" secondItem="elL-Su-ARJ" secondAttribute="bottom" constant="12" id="gm7-Es-afv"/>
+                            <constraint firstItem="Zgh-4V-qOR" firstAttribute="centerX" secondItem="lmV-nH-qqT" secondAttribute="centerX" id="kVU-dR-Qhp"/>
                             <constraint firstItem="HYP-xo-Dd0" firstAttribute="leading" secondItem="lmV-nH-qqT" secondAttribute="leadingMargin" constant="6" id="kfi-PU-9yK"/>
                             <constraint firstItem="4xr-en-tld" firstAttribute="top" secondItem="lmV-nH-qqT" secondAttribute="top" id="lwJ-7c-n7Z"/>
                             <constraint firstItem="gOe-IP-8Fn" firstAttribute="top" secondItem="v31-F8-qwd" secondAttribute="bottom" constant="10" id="plT-0O-aOZ"/>
                             <constraint firstItem="gOe-IP-8Fn" firstAttribute="centerX" secondItem="lmV-nH-qqT" secondAttribute="centerX" id="qUz-zT-y4H"/>
-                            <constraint firstItem="Zgh-4V-qOR" firstAttribute="leading" secondItem="gOe-IP-8Fn" secondAttribute="leading" id="qxV-8i-0oB"/>
                         </constraints>
                     </view>
                     <connections>

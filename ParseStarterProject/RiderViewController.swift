@@ -149,7 +149,6 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         tableView.dataSource = self
         fromTextField.delegate = self
         toTextField.delegate = self
-        
         tableView.isHidden = true
         
         // Manage tableView visibility via TouchDown in textField
@@ -300,19 +299,22 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     func fromTextFieldActive() {
         values = ["Home:\n668 Holland Heights Ave.,\nLas Vegas NV 89123",
                   "Current Location"]
-        tableView.frame = CGRect(x: tableView.frame.origin.x, y: tableView.frame.origin.y, width: tableView.frame.size.width, height: tableView.contentSize.height + 100)
         tableView.reloadData()
+        tableView.frame = CGRect(x: tableView.frame.origin.x, y: tableView.frame.origin.y, width: tableView.frame.size.width, height: tableView.contentSize.height + 100)
         tableView.isHidden = !tableView.isHidden
-    }
+        editField = "fromTextField"
+}
 
     func toTextFieldActive() {
 
-        values = ["668 Holland Heights Ave.,\nLas Vegas NV 89123",
+        values = ["546 Martin Luther King Blvd.,\nLas Vegas NV 89000",
                   "909 Adobe Flat Dr.,\nHenderson NV 89011",
                 "238 Highgate St.\nHenderson, NV 89012"]
-        tableView.frame = CGRect(x: tableView.frame.origin.x, y: 200, width: tableView.frame.size.width, height: tableView.contentSize.height + 100)
         tableView.reloadData()
+        tableView.frame = CGRect(x: tableView.frame.origin.x, y: 200, width: tableView.frame.size.width, height: tableView.contentSize.height + 100)
         tableView.isHidden = !tableView.isHidden
+        editField = "toTextField"
+
     }
     
     // MARK: UITextFieldDelegate
@@ -343,7 +345,6 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell") as UITableViewCell!
         // Set text from the data model
-       // self.tableView.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         cell.textLabel?.text = values[indexPath.row]
         //cell.textLabel?.font = textField.font
         cell.textLabel?.font =  UIFont(name:"Avenir", size:16)
@@ -359,8 +360,14 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Row selected, so set textField to relevant value, hide tableView
         // endEditing can trigger some other action according to requirements
-        fromTextField.text = values[indexPath.row]
-        //toTextField.text = toValues[indexPath.row]
+        
+        if (editField == "fromTextField") {
+            fromTextField.text = values[indexPath.row].replacingOccurrences(of: "Home:", with: "")
+        } else if (editField == "toTextField") {
+            toTextField.text = values[indexPath.row]
+        } else {
+            print(editField)
+        }
         
         tableView.isHidden = true
         fromTextField.endEditing(true)
