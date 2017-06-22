@@ -77,6 +77,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     
     @IBOutlet var callAnUberButton: UIButton!
     
+/*
     @IBAction func whereToTextField(_ sender: CustomTextField) {
 
         if (!datePickerVisible) {
@@ -85,7 +86,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     }
     
     var datePickerVisible = false
-    
+
     func showDatePicker() {
         datePickerVisible = true
         let datePickerView:UIDatePicker = UIDatePicker()
@@ -94,10 +95,11 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         datePickerView.frame = CGRect(x: 0, y: 137, width: view.frame.width, height: 200)
         datePickerView.backgroundColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:1.0)
         // Add an event to call onDidChangeDate function when value is changed.
-        //datePickerView.addTarget(self, action: #selector(RiderViewController.datePickerValueChanged(_:)), for: .valueChanged)
+        datePickerView.addTarget(self, action: #selector(RiderViewController.datePickerValueChanged(_:)), for: .valueChanged)
         
         // Add DataPicker to the view
         view.addSubview(datePickerView)
+        
     }
 
     func datePickerValueChanged(_ sender: UIDatePicker){
@@ -113,7 +115,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         
         print("Selected value \(selectedDate)")
     }
-    
+*/
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -158,7 +158,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3014" y="-1239"/>
+            <point key="canvasLocation" x="-3647" y="-1206"/>
         </scene>
         <!--Rider View Controller-->
         <scene sceneID="xqE-1L-Idt">
@@ -191,9 +191,9 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Where to?" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dA8-PL-QFP" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
-                                <rect key="frame" x="27.5" y="70" width="320" height="60"/>
+                                <rect key="frame" x="17.5" y="70" width="340" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="Ihg-Tf-jVm"/>
+                                    <constraint firstAttribute="width" constant="340" id="Ihg-Tf-jVm"/>
                                     <constraint firstAttribute="height" constant="60" id="z2I-Rw-qtz"/>
                                 </constraints>
                                 <nil key="textColor"/>
@@ -203,6 +203,9 @@
                                     <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="sports-car"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
                                         <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -276,7 +279,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O33-yc-L7q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1927" y="-840"/>
+            <point key="canvasLocation" x="-1682" y="-1540"/>
         </scene>
         <!--Rider Location View Controller-->
         <scene sceneID="ray-dJ-2hX">
@@ -323,7 +326,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5cu-t7-cfK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1122" y="-841"/>
+            <point key="canvasLocation" x="-961" y="-1584"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2Ee-3f-4fw">
@@ -339,7 +342,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kIw-Zd-wAC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1926" y="-1539"/>
+            <point key="canvasLocation" x="-2479" y="-1076"/>
         </scene>
     </scenes>
     <resources>
