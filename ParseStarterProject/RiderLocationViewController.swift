@@ -1,10 +1,7 @@
 //
 //  RiderLocationViewController.swift
 //  ParseStarterProject-Swift
-//
-//  Created by Rob Percival on 11/07/2016.
-//  Copyright © 2016 Parse. All rights reserved.
-//
+
 
 import UIKit
 import Parse

@@ -116,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    private func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         if error.code == 3010 {
             print("Push notifications are not supported in the iOS Simulator.\n")
         } else {
@@ -124,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    private func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         PFPush.handle(userInfo)
         if application.applicationState == UIApplicationState.inactive {
             PFAnalytics.trackAppOpened(withRemoteNotificationPayload: userInfo)

@@ -9,29 +9,24 @@ import MapKit
 class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     func displayAlert(title: String, message: String) {
-        
+
         let alertcontroller = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
         alertcontroller.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        
         self.present(alertcontroller, animated: true, completion: nil)
         
     }
     
     var driverOnTheWay = false
-
     var locationManager = CLLocationManager()
-    
     var riderRequestActive = true
-    
     var userLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     
-    @IBOutlet var map: MKMapView!
+    @IBOutlet var mapView: MKMapView!
     @IBAction func callAnUber(_ sender: AnyObject) {
         
         if riderRequestActive {
             
-            callAnUberButton.setTitle("Call An Uber", for: [])
+            callAnUberButton.setTitle("Go ahead and schedule a ride", for: [])
             riderRequestActive = false
             let query = PFQuery(className: "RiderRequest")
             
@@ -81,13 +76,42 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     }
     
     @IBOutlet var callAnUberButton: UIButton!
+    
+    @IBAction func whereToTextField(_ sender: CustomTextField) {
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "logoutSegue" {
-            locationManager.stopUpdatingLocation()
-            PFUser.logOut()
+        if (!datePickerVisible) {
+            showDatePicker()
         }
+    }
+    
+    var datePickerVisible = false
+    
+    func showDatePicker() {
+        datePickerVisible = true
+        let datePickerView:UIDatePicker = UIDatePicker()
+        
+        datePickerView.datePickerMode = UIDatePickerMode.dateAndTime
+        datePickerView.frame = CGRect(x: 0, y: 137, width: view.frame.width, height: 200)
+        datePickerView.backgroundColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:1.0)
+        // Add an event to call onDidChangeDate function when value is changed.
+        //datePickerView.addTarget(self, action: #selector(RiderViewController.datePickerValueChanged(_:)), for: .valueChanged)
+        
+        // Add DataPicker to the view
+        view.addSubview(datePickerView)
+    }
+
+    func datePickerValueChanged(_ sender: UIDatePicker){
+        
+        // Create date formatter
+        let dateFormatter: DateFormatter = DateFormatter()
+        
+        // Set date format
+        dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
+        
+        // Apply date format
+        let selectedDate: String = dateFormatter.string(from: sender.date)
+        
+        print("Selected value \(selectedDate)")
     }
     
     override func viewDidLoad() {
@@ -98,8 +122,11 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        
+        
         callAnUberButton.isHidden = true
 
+        
         let query = PFQuery(className: "RiderRequest")
         query.whereKey("username", equalTo: (PFUser.current()?.username)!)
         query.findObjectsInBackground(block: { (objects, error) in
@@ -110,9 +137,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
                     self.callAnUberButton.setTitle("Cancel Uber", for: [])
                 }
             }
-            
             self.callAnUberButton.isHidden = false
-            
         })
 
         
@@ -123,13 +148,17 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         if let location = manager.location?.coordinate {
             userLocation = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
             if driverOnTheWay == false {
+                
                 let region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-                self.map.setRegion(region, animated: true)
-                self.map.removeAnnotations(self.map.annotations)
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = userLocation
-                annotation.title = "Your Location"
-                self.map.addAnnotation(annotation)
+                self.mapView.setRegion(region, animated: true)
+                self.mapView.removeAnnotations(self.mapView.annotations)
+                //let annotation = MKPointAnnotation()
+                //annotation.coordinate = userLocation
+                //annotation.title = "Your Location"
+                //self.mapView.addAnnotation(annotation)
+                
+                
+                self.mapView.showsUserLocation = true
             }
             
             let query = PFQuery(className: "RiderRequest")
@@ -186,9 +215,9 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
                                             
                                             let region = MKCoordinateRegion(center: self.userLocation, span: MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lonDelta))
                                             
-                                            self.map.removeAnnotations(self.map.annotations)
+                                            self.mapView.removeAnnotations(self.mapView.annotations)
                                             
-                                            self.map.setRegion(region, animated: true)
+                                            self.mapView.setRegion(region, animated: true)
                                             
                                             let userLocationAnnotation = MKPointAnnotation()
                                             
@@ -196,7 +225,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
                                             
                                             userLocationAnnotation.title = "Your location"
                                             
-                                            self.map.addAnnotation(userLocationAnnotation)
+                                            self.mapView.addAnnotation(userLocationAnnotation)
                                             
                                             let driverLocationAnnotation = MKPointAnnotation()
                                             
@@ -204,45 +233,32 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
                                             
                                             driverLocationAnnotation.title = driverUsername as? String
                                             
-                                            self.map.addAnnotation(driverLocationAnnotation)
+                                            self.mapView.addAnnotation(driverLocationAnnotation)
                                             
                                         }
-                                        
                                     }
-                                    
                                 }
-                                
-                                
                             })
-                            
                         }
-
                     }
-                    
                 }
-                
             })
-            
         }
-        
-        
     }
     
 
+
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        super.touchesBegan(touches, with: event)
+        
+     //   let datePickerView:UIDatePicker = UIDatePicker()
+     //   datePickerView.isHidden = true
     }
-    */
-
 }
