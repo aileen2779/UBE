@@ -200,7 +200,6 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gOe-IP-8Fn" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
                                 <rect key="frame" x="22.5" y="66" width="330" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="Iw5-n8-38e"/>
                                     <constraint firstAttribute="height" constant="60" id="u88-jo-oJg"/>
                                     <constraint firstAttribute="width" constant="330" id="yoj-IR-zp1"/>
                                 </constraints>
@@ -213,7 +212,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="textFieldChanged:" destination="eu9-66-XBW" eventType="editingDidEnd" id="uas-6y-SnN"/>
+                                    <action selector="TextFieldChanged:" destination="eu9-66-XBW" eventType="editingChanged" id="avi-6r-tev"/>
                                 </connections>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Zgh-4V-qOR">

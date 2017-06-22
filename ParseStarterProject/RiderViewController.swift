@@ -208,45 +208,25 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
                                     
                                     for driverLocationObject in driverLocations {
                                         if let driverLocation = driverLocationObject["location"] as? PFGeoPoint {
-                                            
                                             self.driverOnTheWay = true
-                                            
                                             let driverCLLocation = CLLocation(latitude: driverLocation.latitude, longitude: driverLocation.longitude)
-                                            
                                             let riderCLLocation = CLLocation(latitude: self.userLocation.latitude, longitude: self.userLocation.longitude)
-                                            
                                             let distance = riderCLLocation.distance(from: driverCLLocation) / 1000
-                                            
                                             let roundedDistance = round(distance * 100) / 100
-                                            
                                             self.callAnUberButton.setTitle("Your driver is \(roundedDistance) mi away", for: [])
-                                            
                                             let latDelta = abs(driverLocation.latitude - self.userLocation.latitude) * 2 + 0.005
-                                            
                                             let lonDelta = abs(driverLocation.longitude - self.userLocation.longitude) * 2 + 0.005
-                                            
                                             let region = MKCoordinateRegion(center: self.userLocation, span: MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lonDelta))
-                                            
                                             self.mapView.removeAnnotations(self.mapView.annotations)
-                                            
                                             self.mapView.setRegion(region, animated: true)
-                                            
                                             let userLocationAnnotation = MKPointAnnotation()
-                                            
                                             userLocationAnnotation.coordinate = self.userLocation
-                                            
                                             userLocationAnnotation.title = "Your location"
-                                            
                                             self.mapView.addAnnotation(userLocationAnnotation)
-                                            
                                             let driverLocationAnnotation = MKPointAnnotation()
-                                            
                                             driverLocationAnnotation.coordinate = CLLocationCoordinate2D(latitude: driverLocation.latitude, longitude: driverLocation.longitude)
-                                            
                                             driverLocationAnnotation.title = driverUsername as? String
-                                            
                                             self.mapView.addAnnotation(driverLocationAnnotation)
-                                            
                                         }
                                     }
                                 }
@@ -280,14 +260,18 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     
     
     @IBOutlet weak var textField: NoCopyPasteUITextField!
-    
     @IBOutlet weak var tableView: UITableView!
     
     // If user changes text, hide the tableView
-    @IBAction func textFieldChanged(_ sender: AnyObject) {
-        tableView.isHidden = true
-    }
+    //@IBAction func textFieldChanged(_ sender: Any) {
+    //    tableView.isHidden = true
+   // }
     
+    
+    @IBAction func TextFieldChanged(_ sender: Any) {
+        tableView.isHidden = true
+        
+    }
     
     override func viewDidLayoutSubviews()
     {
@@ -347,9 +331,13 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         cell.textLabel?.text = values[indexPath.row]
         //cell.textLabel?.font = textField.font
         cell.textLabel?.font =  UIFont(name:"Avenir", size:16)
+        cell.textLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
     // MARK: UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Row selected, so set textField to relevant value, hide tableView
