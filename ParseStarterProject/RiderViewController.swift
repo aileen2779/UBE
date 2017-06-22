@@ -148,11 +148,13 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         tableView.delegate = self
         tableView.dataSource = self
         fromTextField.delegate = self
+        toTextField.delegate = self
         
         tableView.isHidden = true
         
         // Manage tableView visibility via TouchDown in textField
-        fromTextField.addTarget(self, action: #selector(textFieldActive), for: UIControlEvents.touchDown)
+        fromTextField.addTarget(self, action: #selector(fromTextFieldActive), for: UIControlEvents.touchDown)
+        toTextField.addTarget(self, action: #selector(toTextFieldActive), for: UIControlEvents.touchDown)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -246,8 +248,8 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     
 
     // The sample values
-    var fromValues = ["Home:\n668 Holland Heights Ave.,\nLas Vegas NV 89123", "Current Location"]
-    var toValues = ["668 Holland Heights Ave., Las Vegas NV 89123", "909 Adobe Flat Dr., Henderson NV 89011"]
+    var values = [""]
+
     let cellReuseIdentifier = "cell"
     var editField = ""
     
@@ -295,8 +297,21 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     }
     
     // Toggle the tableView visibility when click on textField
-    func textFieldActive() {
-        print("Test")
+    func fromTextFieldActive() {
+        values = ["Home:\n668 Holland Heights Ave.,\nLas Vegas NV 89123",
+                  "Current Location"]
+        tableView.frame = CGRect(x: tableView.frame.origin.x, y: tableView.frame.origin.y, width: tableView.frame.size.width, height: tableView.contentSize.height + 100)
+        tableView.reloadData()
+        tableView.isHidden = !tableView.isHidden
+    }
+
+    func toTextFieldActive() {
+
+        values = ["668 Holland Heights Ave.,\nLas Vegas NV 89123",
+                  "909 Adobe Flat Dr.,\nHenderson NV 89011",
+                "238 Highgate St.\nHenderson, NV 89012"]
+        tableView.frame = CGRect(x: tableView.frame.origin.x, y: 200, width: tableView.frame.size.width, height: tableView.contentSize.height + 100)
+        tableView.reloadData()
         tableView.isHidden = !tableView.isHidden
     }
     
@@ -319,7 +334,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fromValues.count;
+        return values.count;
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -328,7 +343,8 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell") as UITableViewCell!
         // Set text from the data model
-        cell.textLabel?.text = fromValues[indexPath.row]
+       // self.tableView.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
+        cell.textLabel?.text = values[indexPath.row]
         //cell.textLabel?.font = textField.font
         cell.textLabel?.font =  UIFont(name:"Avenir", size:16)
         cell.textLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -337,14 +353,14 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 70
     }
     // MARK: UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Row selected, so set textField to relevant value, hide tableView
         // endEditing can trigger some other action according to requirements
-        fromTextField.text = fromValues[indexPath.row]
-        toTextField.text = toValues[indexPath.row]
+        fromTextField.text = values[indexPath.row]
+        //toTextField.text = toValues[indexPath.row]
         
         tableView.isHidden = true
         fromTextField.endEditing(true)
