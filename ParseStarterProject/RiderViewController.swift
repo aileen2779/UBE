@@ -45,23 +45,6 @@ class RiderViewController: UIViewController,
                 //
             }
             
-            // Confirm routine
-            let optionMenu = UIAlertController(title: nil, message: "Please Confirm", preferredStyle: .actionSheet)
-            let okAction = UIAlertAction(title: "Schedule this trip", style: .default, handler: {
-                (alert: UIAlertAction!) -> Void in
-                
-            })
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
-                (alert: UIAlertAction!) -> Void in
-                return
-            })
-            optionMenu.addAction(okAction)
-            optionMenu.addAction(cancelAction)
-            
-            self.present(optionMenu, animated: true, completion: nil)
-            // End Conform routine
-            
-            
             callAnUberButton.setTitle("Go ahead and schedule this ride", for: [])
             riderRequestActive = false
             let query = PFQuery(className: "RiderRequest")
@@ -87,23 +70,23 @@ class RiderViewController: UIViewController,
                 let riderRequest = PFObject(className: "RiderRequest")
                 riderRequest["username"] = PFUser.current()?.username
                 riderRequest["location"] = PFGeoPoint(latitude: userLocation.latitude, longitude: userLocation.longitude)
-                riderRequest.saveInBackground(block: { (success, error) in
-                
-                if success {
-                    print("Called an uber")
-                } else {
-                    
-                    self.callAnUberButton.setTitle("Call An Uber", for: [])
-                    self.riderRequestActive = false
-                    self.displayAlert(title: "Could not call Uber", message: "Please try again!")
+                riderRequest.saveInBackground(
+                    block: {
+                        (success, error) in
+                        if success {
+                            print("Called an uber")
+                        } else {
+                            self.callAnUberButton.setTitle("Call An Uber", for: [])
+                            self.riderRequestActive = false
+                            self.displayAlert(title: "Could not call Uber", message: "Please try again!")
+                        }
+                    }
+                )
+            } else {
+            
+                displayAlert(title: "Could not schedule a ride", message: "Cannot detect your location.")
+            
                 }
-            })
-            
-        } else {
-            
-            displayAlert(title: "Could not schedule a ride", message: "Cannot detect your location.")
-            
-        }
         
         }
         
