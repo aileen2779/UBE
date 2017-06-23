@@ -10,6 +10,8 @@
 		7E10FE541EFC576800D8C5E4 /* DateTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E10FE511EFC576800D8C5E4 /* DateTimePicker.swift */; };
 		7E10FE551EFC576800D8C5E4 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E10FE521EFC576800D8C5E4 /* DateCollectionViewCell.swift */; };
 		7E10FE561EFC576800D8C5E4 /* StepCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E10FE531EFC576800D8C5E4 /* StepCollectionViewFlowLayout.swift */; };
+		7E10FE5C1EFC7E5300D8C5E4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E10FE5B1EFC7E5300D8C5E4 /* LaunchScreen.xib */; };
+		7E10FE5E1EFC82C400D8C5E4 /* icon_180.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E10FE5D1EFC82C400D8C5E4 /* icon_180.png */; };
 		7E1CCC5F1EFB83E500B8EC5E /* NoCopyPasteUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1CCC5E1EFB83E500B8EC5E /* NoCopyPasteUITextField.swift */; };
 		7E5A57E91EF3A9640083F4C6 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5A57E81EF3A9640083F4C6 /* CustomTextField.swift */; };
 		7E5A57ED1EF43F3F0083F4C6 /* NPSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5A57EC1EF43F3F0083F4C6 /* NPSegmentedControl.swift */; };
@@ -34,6 +36,8 @@
 		7E10FE511EFC576800D8C5E4 /* DateTimePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimePicker.swift; sourceTree = "<group>"; };
 		7E10FE521EFC576800D8C5E4 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		7E10FE531EFC576800D8C5E4 /* StepCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		7E10FE5B1EFC7E5300D8C5E4 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		7E10FE5D1EFC82C400D8C5E4 /* icon_180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_180.png; sourceTree = "<group>"; };
 		7E1CCC5E1EFB83E500B8EC5E /* NoCopyPasteUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoCopyPasteUITextField.swift; sourceTree = "<group>"; };
 		7E5A57E81EF3A9640083F4C6 /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		7E5A57EC1EF43F3F0083F4C6 /* NPSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NPSegmentedControl.swift; sourceTree = "<group>"; };
@@ -91,7 +95,6 @@
 		7E5A57E71EF3A9490083F4C6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7ECC83651EF4A05D00891574 /* Button */,
 				7E5A57EC1EF43F3F0083F4C6 /* NPSegmentedControl.swift */,
 				7E5A57E81EF3A9640083F4C6 /* CustomTextField.swift */,
 			);
@@ -119,16 +122,10 @@
 			name = TouchID;
 			sourceTree = "<group>";
 		};
-		7ECC83651EF4A05D00891574 /* Button */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Button;
-			sourceTree = "<group>";
-		};
 		814C3AC51B69877600E307BB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7E10FE5D1EFC82C400D8C5E4 /* icon_180.png */,
 				814C3AC81B69877600E307BB /* Images.xcassets */,
 				814C3AC91B69877600E307BB /* Info.plist */,
 			);
@@ -158,6 +155,7 @@
 		81BA81471A49DA1800E65899 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				7E10FE5B1EFC7E5300D8C5E4 /* LaunchScreen.xib */,
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
 				81BA814C1A49DA1800E65899 /* MainController.swift */,
 				C834A5E71D33CECC00AEA09E /* RiderLocationViewController.swift */,
@@ -253,7 +251,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E10FE5E1EFC82C400D8C5E4 /* icon_180.png in Resources */,
 				814C3ACB1B69877600E307BB /* Images.xcassets in Resources */,
+				7E10FE5C1EFC7E5300D8C5E4 /* LaunchScreen.xib in Resources */,
 				C834A5EA1D33CFFC00AEA09E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,7 +6,12 @@ import UIKit
 import Parse
 import MapKit
 
-class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate  {
+class RiderViewController: UIViewController,
+                        MKMapViewDelegate,
+                        CLLocationManagerDelegate,
+                        UITableViewDataSource,
+                        UITableViewDelegate,
+                        UITextFieldDelegate  {
     
     func displayAlert(title: String, message: String) {
 
@@ -22,38 +27,67 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     var userLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     
     @IBOutlet var mapView: MKMapView!
+    
     @IBAction func callAnUber(_ sender: AnyObject) {
         
         if riderRequestActive {
+            // Check for empty fields
+            if (fromTextField.text!.isEmpty) {
+                animateMe(textField: fromTextField)
+                return
+            } else if (toTextField.text!.isEmpty){
+                animateMe(textField: toTextField)
+                return
+            } else if (whenTextField.text!.isEmpty){
+                animateMe(textField: whenTextField)
+                return
+            } else {
+                //
+            }
             
-            callAnUberButton.setTitle("Go ahead and schedule a ride", for: [])
+            // Confirm routine
+            let optionMenu = UIAlertController(title: nil, message: "Please Confirm", preferredStyle: .actionSheet)
+            let okAction = UIAlertAction(title: "Schedule this trip", style: .default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                
+            })
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+                (alert: UIAlertAction!) -> Void in
+                return
+            })
+            optionMenu.addAction(okAction)
+            optionMenu.addAction(cancelAction)
+            
+            self.present(optionMenu, animated: true, completion: nil)
+            // End Conform routine
+            
+            
+            callAnUberButton.setTitle("Go ahead and schedule this ride", for: [])
             riderRequestActive = false
             let query = PFQuery(className: "RiderRequest")
             
             query.whereKey("username", equalTo: (PFUser.current()?.username)!)
-            query.findObjectsInBackground(block: { (objects, error) in
-                
-                if let riderRequests = objects {
-                    
-                    for riderRequest in riderRequests {
+            query.findObjectsInBackground(block: {
+                    (objects, error) in
+                    if let riderRequests = objects {
+                        for riderRequest in riderRequests {
                             riderRequest.deleteInBackground()
-                        
+                        }
                     }
                 }
-            })
+            )
             
         } else {
         
-        if userLocation.latitude != 0 && userLocation.longitude != 0 {
+            if userLocation.latitude != 0 && userLocation.longitude != 0 {
+                riderRequestActive = true
             
-            riderRequestActive = true
-            
-            self.callAnUberButton.setTitle("Cancel Uber", for: [])
+                self.callAnUberButton.setTitle("Cancel this ride", for: [])
         
-            let riderRequest = PFObject(className: "RiderRequest")
-            riderRequest["username"] = PFUser.current()?.username
-            riderRequest["location"] = PFGeoPoint(latitude: userLocation.latitude, longitude: userLocation.longitude)
-            riderRequest.saveInBackground(block: { (success, error) in
+                let riderRequest = PFObject(className: "RiderRequest")
+                riderRequest["username"] = PFUser.current()?.username
+                riderRequest["location"] = PFGeoPoint(latitude: userLocation.latitude, longitude: userLocation.longitude)
+                riderRequest.saveInBackground(block: { (success, error) in
                 
                 if success {
                     print("Called an uber")
@@ -67,7 +101,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
             
         } else {
             
-            displayAlert(title: "Could not call Uber", message: "Cannot detect your location.")
+            displayAlert(title: "Could not schedule a ride", message: "Cannot detect your location.")
             
         }
         
@@ -75,11 +109,16 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         
     }
     
-    @IBOutlet var callAnUberButton: UIButton!
+
     
+    @IBOutlet var callAnUberButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        addShadow(textField: fromTextField)
+        addShadow(textField: toTextField)
+        addShadow(textField: whenTextField)
 
         // Do any additional setup after loading the view.
         locationManager.delegate = self
@@ -230,8 +269,6 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
     @IBOutlet weak var toTextField: CustomTextField!
     @IBOutlet weak var whenTextField: CustomTextField!
     
-    
-    
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func fromTextFieldChanged(_ sender: Any) {
@@ -316,9 +353,7 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         whenTextField.resignFirstResponder()
         return true
     }
-    
-    
-    
+
     func showDatePicker() {
         let min = Date()
         let max = Date().addingTimeInterval(60 * 60 * 24 * 30)
@@ -389,4 +424,23 @@ class RiderViewController: UIViewController, MKMapViewDelegate, CLLocationManage
         return 0.0
     }
 
+    
+    func animateMe(textField: UITextField) {
+        
+        let _thisTextField = textField
+        
+        UIView.animate(withDuration: 0.1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {_thisTextField.center.x += 10 }, completion: nil)
+        UIView.animate(withDuration: 0.1, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {_thisTextField.center.x -= 20 }, completion: nil)
+        UIView.animate(withDuration: 0.1, delay: 0.2, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {_thisTextField.center.x += 10 }, completion: nil)
+    }
+    
+    func addShadow(textField: UITextField) {
+        textField.layer.borderColor = UIColor.clear.cgColor
+        textField.layer.masksToBounds = false
+        textField.layer.shadowColor = UIColor.black.cgColor
+        textField.layer.shadowOffset = CGSize.zero
+        textField.layer.shadowOpacity = 0.5
+        textField.layer.shadowRadius = 5.0
+    }
+    
 }

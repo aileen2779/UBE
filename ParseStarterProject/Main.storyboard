@@ -101,9 +101,10 @@
                                     <action selector="touchIDButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pb7-tV-5ws"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YGq-Kf-IqC" userLabel="Forgot Password Button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YGq-Kf-IqC" userLabel="Forgot Password Button">
                                 <rect key="frame" x="16" y="617" width="77" height="30"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="77" id="ZaT-Fg-yzQ"/>
                                     <constraint firstAttribute="height" constant="30" id="eGy-xO-DjV"/>
                                 </constraints>
                                 <state key="normal" title="Register"/>
@@ -131,12 +132,14 @@
                             <constraint firstItem="YGq-Kf-IqC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="5Xx-ql-yog"/>
                             <constraint firstItem="H3K-Qj-rNY" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="100" id="87t-na-NFt"/>
                             <constraint firstItem="Ph0-OC-JHj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BtX-G0-mYI"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="YGq-Kf-IqC" secondAttribute="bottom" constant="20" id="GqE-qv-n8X"/>
                             <constraint firstItem="hZA-bC-3vy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="IlO-hQ-cp2"/>
                             <constraint firstItem="hZA-bC-3vy" firstAttribute="top" secondItem="H3K-Qj-rNY" secondAttribute="bottom" constant="38" id="JXY-ZJ-Upt"/>
                             <constraint firstItem="H3K-Qj-rNY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ltw-lb-ial"/>
                             <constraint firstItem="Ph0-OC-JHj" firstAttribute="top" secondItem="hZA-bC-3vy" secondAttribute="bottom" id="NZD-JA-CZp"/>
                             <constraint firstItem="7yq-5q-S7w" firstAttribute="top" secondItem="hZA-bC-3vy" secondAttribute="bottom" constant="20" id="ne6-Mz-ShK"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="YGq-Kf-IqC" secondAttribute="bottom" constant="20" id="oLM-UV-n76"/>
+                            <constraint firstItem="YGq-Kf-IqC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="pQv-hS-Dze"/>
                             <constraint firstAttribute="trailing" secondItem="dYJ-XQ-eTn" secondAttribute="trailing" constant="9" id="q6X-2K-ZUR"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dYJ-XQ-eTn" secondAttribute="bottom" constant="20" id="x72-Wa-LJd"/>
                         </constraints>
@@ -173,8 +176,9 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4xr-en-tld">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="When?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9hT-ut-FD1" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
+                            <textField opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="When?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9hT-ut-FD1" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
                                 <rect key="frame" x="23" y="196" width="330" height="60"/>
+                                <color key="backgroundColor" red="0.91477886730000002" green="0.94991112759999996" blue="0.93750542299999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="330" id="PVV-95-ijy"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="330" id="Rli-m5-wAS"/>
@@ -190,20 +194,19 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="toTextFieldChanged:" destination="eu9-66-XBW" eventType="editingChanged" id="8VA-qk-luA"/>
                                     <action selector="whenTextFieldChanged:" destination="eu9-66-XBW" eventType="editingChanged" id="N1h-LZ-1Vu"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mu8-Up-6wd">
-                                <rect key="frame" x="37" y="560" width="300" height="46"/>
-                                <color key="backgroundColor" red="0.56699335049999999" green="0.76079446979999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="22" y="551" width="330" height="55"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="46" id="S2K-ZE-IjD"/>
-                                    <constraint firstAttribute="width" constant="300" id="yRm-1U-Yuc"/>
+                                    <constraint firstAttribute="height" constant="55" id="S2K-ZE-IjD"/>
+                                    <constraint firstAttribute="width" constant="330" id="yRm-1U-Yuc"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Request a ride">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.91477886730000002" green="0.94991112759999996" blue="0.93750542299999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="callAnUber:" destination="eu9-66-XBW" eventType="touchUpInside" id="sKT-vZ-03i"/>
@@ -216,8 +219,9 @@
                                     <constraint firstAttribute="height" constant="24" id="cfk-cY-FcC"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Where to?" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="HYP-xo-Dd0" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
+                            <textField opaque="NO" clipsSubviews="YES" alpha="0.84999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Where to?" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="HYP-xo-Dd0" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
                                 <rect key="frame" x="23" y="131" width="330" height="60"/>
+                                <color key="backgroundColor" red="0.91477886730000002" green="0.94991112759999996" blue="0.93750542299999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="PkD-qp-4Fs"/>
                                     <constraint firstAttribute="width" constant="330" id="yON-AN-y7x"/>
@@ -234,8 +238,9 @@
                                     <action selector="toTextFieldChanged:" destination="eu9-66-XBW" eventType="editingChanged" id="c2c-t6-09F"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pick up from" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gOe-IP-8Fn" userLabel="Pick up" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
+                            <textField opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pick up from" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gOe-IP-8Fn" userLabel="Pick up" customClass="CustomTextField" customModule="ParseStarterProject_Swift" customModuleProvider="target">
                                 <rect key="frame" x="22.5" y="66" width="330" height="60"/>
+                                <color key="backgroundColor" red="0.91477886725326529" green="0.94991112764550267" blue="0.93750542301151929" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="u88-jo-oJg"/>
                                     <constraint firstAttribute="width" constant="330" id="yoj-IR-zp1"/>
@@ -294,7 +299,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MOi-Q4-h7o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3647" y="-445"/>
+            <point key="canvasLocation" x="-2572" y="-166"/>
         </scene>
         <!--Request List-->
         <scene sceneID="6g5-b0-nA1">
@@ -332,7 +337,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O33-yc-L7q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1682" y="-1540"/>
+            <point key="canvasLocation" x="-1911" y="-2137"/>
         </scene>
         <!--Rider Location View Controller-->
         <scene sceneID="ray-dJ-2hX">
