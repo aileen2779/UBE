@@ -337,7 +337,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O33-yc-L7q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1911" y="-2137"/>
+            <point key="canvasLocation" x="-2046" y="-1207"/>
         </scene>
         <!--Rider Location View Controller-->
         <scene sceneID="ray-dJ-2hX">
@@ -379,12 +379,12 @@
                     </view>
                     <connections>
                         <outlet property="acceptRequestButton" destination="SBm-dO-UQX" id="M7H-un-Vb9"/>
-                        <outlet property="map" destination="d9i-6b-oeV" id="s9R-pE-GG6"/>
+                        <outlet property="mapView" destination="d9i-6b-oeV" id="DPu-gZ-i3o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5cu-t7-cfK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-961" y="-1584"/>
+            <point key="canvasLocation" x="-1170" y="-1208"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2Ee-3f-4fw">
@@ -400,7 +400,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kIw-Zd-wAC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2479" y="-1076"/>
+            <point key="canvasLocation" x="-2905" y="-1207"/>
         </scene>
     </scenes>
     <resources>

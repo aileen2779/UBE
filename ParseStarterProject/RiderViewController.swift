@@ -30,7 +30,6 @@ class RiderViewController: UIViewController,
     
     @IBAction func callAnUber(_ sender: AnyObject) {
         
-        if riderRequestActive {
             // Check for empty fields
             if (fromTextField.text!.isEmpty) {
                 animateMe(textField: fromTextField)
@@ -44,7 +43,8 @@ class RiderViewController: UIViewController,
             } else {
                 //
             }
-            
+        
+            /*
             callAnUberButton.setTitle("Go ahead and schedule this ride", for: [])
             riderRequestActive = false
             let query = PFQuery(className: "RiderRequest")
@@ -59,17 +59,20 @@ class RiderViewController: UIViewController,
                     }
                 }
             )
-            
-        } else {
+            */
         
-            if userLocation.latitude != 0 && userLocation.longitude != 0 {
-                riderRequestActive = true
+        let optionMenu = UIAlertController(title: nil, message: "Are you sure?", preferredStyle: .actionSheet)
+        let scheduleAction = UIAlertAction(title: "Schedule this ride", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
             
-                self.callAnUberButton.setTitle("Cancel this ride", for: [])
-        
+            
+            //Insert into AWS
+            if self.userLocation.latitude != 0 && self.userLocation.longitude != 0 {
+                self.riderRequestActive = true
+                //self.callAnUberButton.setTitle("Cancel this ride", for: [])
                 let riderRequest = PFObject(className: "RiderRequest")
                 riderRequest["username"] = PFUser.current()?.username
-                riderRequest["location"] = PFGeoPoint(latitude: userLocation.latitude, longitude: userLocation.longitude)
+                riderRequest["location"] = PFGeoPoint(latitude: self.userLocation.latitude, longitude: self.userLocation.longitude)
                 riderRequest.saveInBackground(
                     block: {
                         (success, error) in
@@ -80,16 +83,30 @@ class RiderViewController: UIViewController,
                             self.riderRequestActive = false
                             self.displayAlert(title: "Could not call Uber", message: "Please try again!")
                         }
-                    }
+                }
                 )
             } else {
+                
+                self.displayAlert(title: "Could not schedule a ride", message: "Cannot detect your location.")
+                
+            }
+            //End insert
             
-                displayAlert(title: "Could not schedule a ride", message: "Cannot detect your location.")
             
-                }
+            
+        })
+        //
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("Cancelled")
+        })
         
-        }
+        optionMenu.addAction(scheduleAction)
+        optionMenu.addAction(cancelAction)
+        self.present(optionMenu, animated: true, completion: nil)
         
+        
+
     }
     
 
@@ -112,7 +129,7 @@ class RiderViewController: UIViewController,
         
         callAnUberButton.isHidden = true
 
-        
+        /*
         let query = PFQuery(className: "RiderRequest")
         query.whereKey("username", equalTo: (PFUser.current()?.username)!)
         query.findObjectsInBackground(block: { (objects, error) in
@@ -125,7 +142,9 @@ class RiderViewController: UIViewController,
             }
             self.callAnUberButton.isHidden = false
         })
-
+ */
+        self.callAnUberButton.isHidden = false
+        
         // Textfield
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         
